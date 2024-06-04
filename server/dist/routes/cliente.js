@@ -1,16 +1,16 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const cliente_1 = require("../controllers/cliente");
+const auth_1 = __importDefault(require("./auth"));
 const router = (0, express_1.Router)();
-// Ruta para crear un nuevo cliente
-router.post('/', cliente_1.createCliente);
-// Ruta para obtener la lista de clientes
-router.get('/list', cliente_1.getClientes);
-// Ruta para obtener un cliente por su número de celular
-router.get('/:CELULAR_CLIENTE', cliente_1.getCliente);
-// Ruta para eliminar un cliente por su número de celular
-router.delete('/:CELULAR_CLIENTE', cliente_1.deleteCliente);
-// Ruta para actualizar los datos de un cliente por su número de celular
-router.put('/:CELULAR_CLIENTE', cliente_1.updateCliente);
+router.post('/', cliente_1.newCliente);
+router.post('/login', cliente_1.loginCliente);
+router.get('/list', auth_1.default, cliente_1.getClientes);
+router.get('/:cod_cliente', auth_1.default, cliente_1.getCliente);
+router.delete('/:cod_cliente', auth_1.default, cliente_1.deleteCliente);
+router.put('/:cod_cliente', auth_1.default, cliente_1.updateCliente);
 exports.default = router;

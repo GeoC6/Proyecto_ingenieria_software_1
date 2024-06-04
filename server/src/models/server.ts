@@ -1,6 +1,5 @@
 import express, { Application } from 'express';
 import cors from 'cors';
-import { Rol } from './rol';
 import routesRoles from '../routes/roles';
 import routesUser from '../routes/user';
 import routesProducto from '../routes/producto';
@@ -16,7 +15,9 @@ import routesDepositos from '../routes/deposito';
 import routesTarjetas from '../routes/datos_de_tarjeta';
 import routesPagos from '../routes/pagos';
 import routesTransacciones from '../routes/transaccion';
+import webpayRoutes from '../routes/webpayRoutes';
 import { User } from './user';
+import { Rol } from './rol';
 import { Producto } from './producto';
 import { Vehiculo } from './vehiculo';
 import { Reserva } from './reserva';
@@ -33,9 +34,6 @@ import { datos_de_tarjeta } from './datos_de_tarjeta';
 import { pagos } from './pagos';
 import { transaccion } from './transaccion';
 
-
-
-
 class Server {
     private app: Application;
     private port: string;
@@ -44,21 +42,17 @@ class Server {
         this.app = express();
         this.port = process.env.PORT || '3000';
 
-
         this.midlewares();
         this.listen();
         this.dbConnect();
         this.routes();
-        this.startReservaStateCheck()
-        // this.firstUser()
-
-
+        this.startReservaStateCheck();
     }
 
     listen() {
         this.app.listen(this.port, () => {
             console.log('Corriendo en el puerto ' + this.port);
-        })
+        });
     }
 
     routes() {
@@ -78,54 +72,53 @@ class Server {
         this.app.use('/api/carrito', routesCarrito);
         this.app.use('/api/facturas', routesFacturas);
         this.app.use('/api/detalle_factura', routesDetalle_factura);
+        this.app.use('/webpay', webpayRoutes);
     }
 
     midlewares() {
-
         this.app.use(express.json());
         this.app.use(cors());
     }
 
     async dbConnect() {
         try {
-            await Vehiculo.sync()
-            await Rol.sync()
-            await User.sync()
-            await Producto.sync()
-            await Reserva.sync()
-            await DetalleReserva.sync()
-            await metodos_de_pago.sync()
-            await deposito.sync()
-            await pagos.sync()
-            await transaccion.sync()
-            await datos_de_tarjeta.sync()
-            await Cliente.sync()
-            await Facturas.sync()
-            await Detalle_Factura.sync()
-            await Carrito.sync()
-
+            await Vehiculo.sync();
+            await Rol.sync();
+            await User.sync();
+            await Producto.sync();
+            await Reserva.sync();
+            await DetalleReserva.sync();
+            await metodos_de_pago.sync();
+            await deposito.sync();
+            await pagos.sync();
+            await transaccion.sync();
+            await datos_de_tarjeta.sync();
+            await Cliente.sync();
+            await Facturas.sync();
+            await Detalle_Factura.sync();
+            await Carrito.sync();
         } catch (error) {
-            console.error('No se ha podido conectar a la base de datos');
+            console.error('No se ha podido conectar a la base de datos', error);
         }
     }
 
     async firstUser() {
         try {
-            await firstSteps()
+            await firstSteps();
         } catch (error) {
             console.error('Ha ocurrido un error en el servidor', error);
-
         }
     }
+
     async startReservaStateCheck() {
         setInterval(async () => {
             try {
-                comprobarEstadoReserva()
-
+                await comprobarEstadoReserva();
             } catch (error) {
                 console.error('Ha ocurrido un error en el servidor', error);
             }
         }, 1500000);
     }
 }
+
 export default Server;
