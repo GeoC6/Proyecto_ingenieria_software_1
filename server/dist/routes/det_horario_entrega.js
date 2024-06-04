@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const det_horario_entrega_1 = require("../controllers/det_horario_entrega");
+const router = (0, express_1.Router)();
+router.get('/list', det_horario_entrega_1.getDetalle_horario_entregas);
+router.post('/', det_horario_entrega_1.newHorarioEntrega);
+router.get('/:codigo', det_horario_entrega_1.getHorarioEntrega);
+router.delete('/:codigo', det_horario_entrega_1.deleteHorarioEntrega);
+router.put('/:codigo', det_horario_entrega_1.updateHorarioEntrega);
+exports.default = router;

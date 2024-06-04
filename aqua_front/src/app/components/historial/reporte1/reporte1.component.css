@@ -1,0 +1,69 @@
+section {
+    display: table;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+  
+  .example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  
+  .example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+  .mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .filler {
+    flex: 1;
+  }
+
+  .container {
+    background-color: #e6f7ff; /* Cambia este valor al color celeste claro que desees */
+    padding: 20px;
+    border-radius: 10px; /* Añade esquinas redondeadas */
+    margin-top: 20px;
+  }
+  
+  .card {
+    margin-top: 20px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff; /* Cambia este valor al color azul primario que desees */
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Cambia este valor al color azul más oscuro al pasar el ratón */
+    border-color: #0056b3;
+  }
+  
+  .alert-danger {
+    margin-top: 20px;
+  }
+
+  .fondo-oscuro {
+    background-color: #334257; /* Puedes ajustar el color según tus preferencias */
+    color: white; /* Puedes ajustar el color del texto según tus preferencias */
+  }

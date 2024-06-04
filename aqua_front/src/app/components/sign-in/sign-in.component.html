@@ -1,0 +1,41 @@
+<div class="wrapper">
+    <div *ngIf="!loading" class="body">
+        <img class="logo" src="../../../assets/img/login.png" alt="img login">
+        <h3>Registrar Usuario</h3>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" [(ngModel)]="username" class="form-control" placeholder="Ingrese Rut usuario">
+            <label>Rut Usuario</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" [(ngModel)]="name" class="form-control" placeholder="Ingrese Nombre usuario">
+            <label>Nombre Usuario</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" [(ngModel)]="apellido1" class="form-control" placeholder="Ingrese primer apellido">
+            <label>Apellido Paterno Usuario</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" [(ngModel)]="apellido2" class="form-control" placeholder="Ingrese segundo apellido">
+            <label>Apellido Materno Usuario</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <select id="rol" name="rol" [(ngModel)]="rol" class="form-select">
+              <option value="1">Administrador</option>
+              <option value="2">Empleado</option>
+            </select>
+            <label for="rol">Selecciona el Rol de Usuario</label>
+          </div>          
+        <div class="form-floating mb-3">
+            <input type="password" [(ngModel)]="password" class="form-control" placeholder="Ingrese password">
+            <label>Contraseña</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" [(ngModel)]="confirmPassword" class="form-control" placeholder="Ingrese password de nuevo">
+            <label>Repetir Contraseña</label>
+        </div>
+        <div class="d-grid gap-2 mb-3">
+            <button type="button" (click)="addUser()" class="btn btn-primary btn-lg">Registrar</button>
+        
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
+</div>

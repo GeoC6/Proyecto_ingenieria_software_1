@@ -1,0 +1,34 @@
+<!-- En tu componente (reporte2.component.html) -->
+<div class="container mt-4">
+  <h2>Reporte de Ventas por Mes</h2>
+
+  <div>
+    <label for="anoReporte">Año:</label>
+    <input type="text" id="anoReporte" [(ngModel)]="anoReporte" placeholder="Año" />
+  </div>
+
+  <button mat-button class="btn btn-primary mt-4" (click)="obtenerVentasPorMes()">Obtener Reporte</button>
+
+  <div *ngIf="mostrarDatos">
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>Mes</th>
+          <th>Cantidad de Ventas</th>
+          <th>Total de Dinero</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let venta of datosTablaVentasPorMes">
+          <td>{{ venta.mes }}</td>
+          <td>{{ venta.cantidadVentas }}</td>
+          <td>{{ venta.totalDinero }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="mensajeSinDatos" class="alert alert-info mt-3">
+    {{ mensajeSinDatos }}
+  </div>
+</div>

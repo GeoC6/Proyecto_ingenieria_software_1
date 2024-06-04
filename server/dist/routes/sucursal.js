@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const sucursal_1 = require("../controllers/sucursal");
+const router = (0, express_1.Router)();
+router.get('/list', sucursal_1.getSucursales);
+router.post('/', sucursal_1.newSucursal);
+router.get('/:cod_sucursal', sucursal_1.getSucursal);
+router.delete('/:cod_sucursal', sucursal_1.deleteSucursal);
+router.put('/:cod_sucursal', sucursal_1.updateSucursal);
+exports.default = router;

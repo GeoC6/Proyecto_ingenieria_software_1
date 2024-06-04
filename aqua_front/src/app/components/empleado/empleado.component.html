@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav custom-sidenav" fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
+      <mat-toolbar class="text-center"><a mat-raised-button class="navbar-brand" href="#">Menu</a>
+      </mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item class="empleados-row" (click)="toggleEmpleadosInfo()" [class.active]="showEmpleadosInfo">
+          <i class="fa-solid fa-users-between-lines"></i>Empleados
+        </a>
+        
+        <a mat-list-item class="vehiculos-row" (click)="toggleVehiculosInfo()" [class.active]="showVehiculosInfo">
+          <i class="fa-solid fa-car"></i>Vehiculos
+        </a>
+        
+        <a mat-list-item class="inventario-row" (click)="toggleInventarioInfo()" [class.active]="showInventarioInfo">
+          <i class="fa-solid fa-warehouse"></i>Inventario/Stock
+        </a>
+        
+        <a mat-list-item class="historial-row" (click)="toggleHistorialInfo()" [class.active]="showHistorialInfo">
+          <i class="fa-solid fa-clipboard-list"></i>Historial de pedidos
+        </a>        
+         <div class="d-flex flex-column align-items-center">
+          <button mat-raised-button class="btn btn-outline-success mb-3 bottom-button" 
+          (click)="logOut()" type="button" aria-label="Example icon button with a singout icon">Cerrar Sesión <mat-icon>open_in_new</mat-icon></button>
+        </div>
+        
+        
+  
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-dashboard></app-dashboard>
+      <div *ngIf="showEmpleadosInfo"><app-uempleados></app-uempleados></div>
+      <div *ngIf="showVehiculosInfo"><app-vempleados></app-vempleados></div>
+      <div *ngIf="showInventarioInfo"><app-index></app-index></div>
+      <div *ngIf="showHistorialInfo"><app-historial></app-historial></div>
+    <!-- Resto de tu contenido -->
+     
+      <!-- Add Content Here -->
+      
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+  

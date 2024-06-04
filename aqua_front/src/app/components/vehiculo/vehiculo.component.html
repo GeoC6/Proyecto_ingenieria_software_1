@@ -1,0 +1,52 @@
+<div class="container">
+    <mat-toolbar>
+      <span>Lista de vehiculos</span>
+      <span class="filler"></span>
+      <button mat-button class="mat-primary" (click)="redirectToSignInVehiculos()">Registrar vehiculo</button>
+    </mat-toolbar>
+   
+    <table 
+      mat-table
+      [dataSource]="vehiculo"
+      class="mat-elevation-z8"
+      style="width: 100%"
+    >
+      <ng-container matColumnDef="patente_cod_vehiculo">
+        <th mat-header-cell *matHeaderCellDef>PATENTE VEHICULO</th>
+        <td mat-cell *matCellDef="let element">{{ element.PATENTE_COD_VEHICULO }}</td>
+      </ng-container>
+      <ng-container matColumnDef="marca">
+        <th mat-header-cell *matHeaderCellDef>MARCA</th>
+        <td mat-cell *matCellDef="let element">{{ element.MARCA }}</td>
+      </ng-container>
+      <ng-container matColumnDef="modelo">
+        <th mat-header-cell *matHeaderCellDef>MODELO </th>
+        <td mat-cell *matCellDef="let element">{{ element.MODELO }}</td>
+      </ng-container>
+      <ng-container matColumnDef="color">
+        <th mat-header-cell *matHeaderCellDef>COLOR</th>
+        <td mat-cell *matCellDef="let element">{{ element.COLOR }}</td>
+      </ng-container>
+      <ng-container matColumnDef="ano">
+        <th mat-header-cell *matHeaderCellDef>AÑO</th>
+        <td mat-cell *matCellDef="let element">{{ element.ANO }}</td>
+      </ng-container>
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let element">
+          <button (click)="editarVehiculo(element.PATENTE_COD_VEHICULO)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button (click)="eliminarVehiculo(element.PATENTE_COD_VEHICULO)" mat-mini-fab class="boton-rojo"
+              aria-label="Example icon button with a delete icon">
+            <mat-icon>delete</mat-icon>
+          </button>
+        
+      </td>
+      </ng-container>
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  

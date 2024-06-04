@@ -1,0 +1,232 @@
+/* caracteristicas generales */
+*{margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* Estilos personalizados para el botón de inicio de sesión */
+.btn-outline-success-on-hover {
+    margin-right: 1rem;
+    background-color:white; /* Fondo predeterminado (negro) */
+    color: black; /* Texto blanco */
+    transition: background-color 0.3s; /* Transición de color de fondo */
+  }
+  
+.btn-outline-success-on-hover:hover {
+  background-color: #28a745; /* Fondo verde al pasar el cursor */
+  color: swhite; /* Texto blanco */
+}
+
+/* caracteristicas botón 'haz tu pedido' */
+.nav-b{
+  color: #ffffff;
+  height: 2.5rem;
+  width: 8.5rem;
+  background:#1acaf1;
+  text-decoration: none;
+  border-radius: 2rem;
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* caracteristicas del cuerpo */
+body{
+  text-align: center;
+  font-family:sans-serif;
+}
+
+/* caracteristicas del encabezado */
+.header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* caracteristicas del encabezado (imagen de fondo) */
+.header{
+  height: 65vh !important;
+  background: url(../../../assets/img/fondoAqua.png) no-repeat center;
+  background-size: cover;
+  background-position-y: top;
+}
+
+/* caracteristicas del titulo 'Aqua Pura' */
+.tittle{
+  margin-top: -17rem;
+  margin-bottom: 4rem;
+  font-size: 80px;
+  font-weight: 600;
+}
+
+/* caracteristicas genreales del contenido  */
+.content{
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* caracteristicas de la sección productos */
+.prod{
+  padding: 30px;
+  background: #b1daf7;
+}
+
+/* caracteristicas del titulo 'productos' */
+.tittleP{
+  margin-top: 63rem;
+  margin-bottom: 4rem;
+  font-size: 80px;
+  font-weight: 600;
+}
+
+/* caracteristicas del box contenedor principal */
+.box-container{
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+/* caracteristicas de box tipo 1 */
+.box-container .box1{
+  height: 30rem;
+  width: 26rem;
+  /*background:#4294e7;*/
+  text-align: center;
+  border-radius: 1rem;
+  margin: 1rem;
+}
+
+/* caracteristicas de box tipo 2*/
+.box-container .box2{
+  height: 18rem;
+  width: 35rem;
+  /*background:#4294e7;*/
+  text-align: center;
+  border-radius: 1rem;
+  margin: 2rem;
+}
+
+/* caracteristicas de la sección nosotros */
+.About{
+  padding: 30px;
+  background: #b1daf7;
+  height: 170vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* caracteristicas del titulo 'nosotros' */
+.tittleN{
+  margin-top: 55rem;
+  margin-bottom: 4rem;
+  font-size: 80px;
+  font-weight: 600;
+}
+
+/* caracteristicas contenido sección nosotros */
+.p{
+  width: 60rem;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* caracteristicas sección contacto */
+.Contact{
+  height: 65%;
+  background: #000000f9;
+}
+
+/* caracteristicas titulo 'contacto' */
+.tittleH{
+  margin-top: -3rem;
+  margin-bottom: 3rem;
+  font-size: 40px;
+  font-weight: 600;
+  color: #fffffff9;
+}
+
+.tittleC{
+  margin-top: -3rem;
+  margin-bottom: 3rem;
+  font-size: 40px;
+  font-weight: 600;
+  color: #fffffff9;
+}
+
+.tittleL{
+  margin-top: -3rem;
+  margin-bottom: 3rem;
+  font-size: 40px;
+  font-weight: 600;
+  color: #fffffff9;
+}
+/* caracteristicas contenido de contacto */
+.parrafoC{
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-size: 18px;
+}
+
+/* caracteristicas icono de WhatsApp */
+.fa-brands{
+  color: #36e15e;
+}
+
+/* caracteristicas icono de Gmail */
+.fa-regular{
+  color: #1acaf1;
+}
+
+.fa-location-dot{
+  color: #f1411a;
+}
+
+.column-container {
+  margin-top: 2rem; 
+}
+
+.contact-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5rem; 
+  
+}
+
+.columnH {
+  width: 55%; 
+  margin-left: 3rem;
+}
+
+.columnC {
+  width: 55%; 
+  margin-left: 5rem;
+}
+
+.columnL {
+  width: 55%; 
+  margin-left: 5rem;
+}
+
+@media (max-width: 768px) {
+  .contact-info {
+    flex-direction: column;
+  }
+
+  .column {
+    width: 100%;
+    margin-bottom: 10px; 
+    margin-right: 0; 
+  }
+}

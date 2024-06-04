@@ -1,0 +1,31 @@
+<div class="wrapper">
+    <div *ngIf="!loading" class="body">
+        <img class="logo" src="../../../assets/img/login.png" alt="img login">
+        <h3>Registrar Patente</h3>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" [(ngModel)]="patente_cod_vehiculo" class="form-control" placeholder="Ingrese patente">
+            <label>Patente vehiculo</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" [(ngModel)]="marca" class="form-control" placeholder="Ingrese marca">
+            <label> marca</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" [(ngModel)]="modelo" class="form-control" placeholder="Ingrese modelo">
+            <label>modelo</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" [(ngModel)]="color" class="form-control" placeholder="Ingrese color">
+            <label>color</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" [(ngModel)]="ano" class="form-control" placeholder="Ingrese año de vehiculo">
+            <label>año</label>
+        </div>
+        
+        <div class="d-grid gap-2 mb-3">
+            <button type="button" (click)="addVehiculo()" class="btn btn-primary btn-lg">Registrar vehiculo</button>
+        
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
+</div>

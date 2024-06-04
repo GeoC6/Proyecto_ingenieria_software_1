@@ -1,0 +1,26 @@
+<div class="wrapper">
+    <div *ngIf="!loading" class="body">
+        <img class="logo" src="../../../assets/img/login.png" alt="img login">
+        <h3>Modificar Producto</h3>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" [(ngModel)]="nombre" class="form-control" placeholder="Ingrese nombre producto">
+            <label>nombre producto</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" [(ngModel)]="precio" class="form-control" placeholder="Ingrese precio">
+            <label>precio</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" [(ngModel)]="cantidad_total" class="form-control" placeholder="Ingrese cantidad total">
+            <label>cantidad total</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" [(ngModel)]="cantidad_disponible" class="form-control" placeholder="Ingrese cantidad disponible">
+            <label>cantidad disponible</label>
+        </div>
+        <div class="d-grid gap-2 mb-3">
+            <button type="button" (click)="updateInventario()" class="btn btn-primary btn-lg">Registrar</button>
+        
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
+</div>

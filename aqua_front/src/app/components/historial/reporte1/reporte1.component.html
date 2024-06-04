@@ -1,0 +1,48 @@
+<!-- reporte1.component.html -->
+<!-- Dentro de tu archivo reporte1.component.html -->
+<div class="container mt-4 bg-light p-4 bg-primary"> <!-- Agregado bg-primary para el fondo celeste claro -->
+  <h1 class="mb-4">Reporte de Productos Más Vendidos</h1>
+  <div class="row">
+    <div class="col-md-3">
+      <label for="fechaInicio" class="form-label">Fecha de Inicio:</label>
+      <input type="date" class="form-control" id="fechaInicio" [(ngModel)]="fechaInicio" />
+    </div>
+    <div class="col-md-3">
+      <label for="fechaFinal" class="form-label">Fecha Final:</label>
+      <input type="date" class="form-control" id="fechaFinal" [(ngModel)]="fechaFinal" />
+    </div>
+    <div class="col-md-3">
+      <button mat-button class="btn btn-primary mt-4" (click)="obtenerMasVendido()">Obtener Reporte</button>
+    </div>
+  </div>
+
+ <!-- Muestra la información solo si hay resultados o mensaje informativo -->
+ <div *ngIf="resultadoMasVendido || mensajeSinDatos" class="mt-4">
+  <div *ngIf="resultadoMasVendido">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Producto más vendido:</h5>
+        <p class="card-text">{{ resultadoMasVendido.idProducto.NOMBRE_PRODUCTO }}</p>
+      </div>
+    </div>
+    <div class="card mt-4">
+      <div class="card-body">
+        <h5 class="card-title">Cantidad vendida:</h5>
+        <p class="card-text">{{ resultadoMasVendido.cantidadMayor }}</p>
+      </div>
+    </div>
+
+    <!-- Muestra la tabla solo si hay resultados -->
+    <div *ngIf="mostrarTabla && datosTablaMasVendido.length > 0" class="mt-4">
+      <h3>Tabla de Resultados</h3>
+      <!-- ... (código de la tabla) ... -->
+    </div>
+  </div>
+
+  <!-- Muestra el mensaje informativo si no hay datos -->
+  <div *ngIf="mensajeSinDatos" class="alert alert-info mt-4">
+    {{ mensajeSinDatos }}
+  </div>
+</div>
+
+  
