@@ -53,6 +53,7 @@ import { Reporte3Component } from './components/historial/reporte3/reporte3.comp
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { WebpayReturnComponent } from './components/reserva/return.component';
 
 
 
@@ -76,19 +77,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     EmpleadoComponent,
     UempleadosComponent,
     VempleadosComponent,
-    ReservaComponent,
     InventarioCreateComponent,
     InventarioEditComponent,
     HistorialComponent,
     Reporte1Component,
     Reporte2Component,
     Reporte3Component,
+    WebpayReturnComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule ,
     MatTableModule,
     MatSortModule,
     BrowserModule,
@@ -100,7 +101,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSelectModule,
     MatInputModule,
     MatFormFieldModule,
-    ReservaModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot({
       timeOut: 4000,

@@ -1,7 +1,9 @@
-// reserva.component.ts
+//reserva.component.ts
+
+
 import { Component, OnInit } from '@angular/core';
 import { ReservaService } from 'src/app/services/reserva.service';
-import { Cliente } from 'src/app/services/reserva.service';
+import { Cliente, PedidoInfo } from 'src/app/services/reserva.service';
 
 @Component({
   selector: 'app-reserva',
@@ -35,7 +37,6 @@ export class ReservaComponent implements OnInit {
   }
 
   realizarPedido(): void {
-    // Validación de campos vacíos
     if (this.productos.some((producto) => producto.seleccionado && producto.cantidadPedido === 0)) {
       alert('La cantidad debe ser mayor que 0 para los productos seleccionados.');
       return;
@@ -44,13 +45,10 @@ export class ReservaComponent implements OnInit {
       alert('Todos los campos del cliente son obligatorios.');
       return;
     }
-
-    // Obtener solo los productos seleccionados
+  
     const productosSeleccionados = this.productos.filter((producto) => producto.seleccionado);
-
-    // Realizar el pedido solo si hay productos seleccionados
+  
     if (productosSeleccionados.length > 0) {
-      // Construir el objeto PedidoInfo directamente
       const pedidoInfo = {
         productos: productosSeleccionados,
         nombrePersona: this.nombreCliente,
@@ -58,8 +56,7 @@ export class ReservaComponent implements OnInit {
         direccionPersona: this.direccionCliente,
         ciudadCliente: this.ciudadCliente,
       };
-
-      // Llamar al servicio de pedido
+  
       this.reservaService
         .realizarPedido(
           {
@@ -73,69 +70,53 @@ export class ReservaComponent implements OnInit {
         )
         .subscribe({
           next: (response) => {
-            // Éxito: Aquí puedes realizar acciones adicionales después de realizar el pedido
             console.log('Pedido realizado con éxito:', response);
-
-            // Obtener el cod_reserva de la respuesta
+  
             const cod_reserva = response.reserva.COD_RESERVA;
-
-            // Realizar la solicitud GET para obtener información adicional
-            this.reservaService.getInformacionReserva(cod_reserva).subscribe({
-              next: (informacionReserva) => {
-                // Aquí puedes manejar la información adicional, por ejemplo, abrir el PDF
-                console.log('Información adicional de la reserva:', informacionReserva);
-
-
-            // Restablecer campos después de realizar el pedido
-            this.nombreCliente = '';
-            this.celularCliente = '';
-            this.direccionCliente = '';
-            this.ciudadCliente = '';
-            this.apellidoCliente = '';
-            this.productos.forEach((producto) => (producto.cantidadPedido = 0));
+  
+            // Iniciar la transacción de WebPay
+            this.iniciarTransaccionWebPay(cod_reserva, pedidoInfo);
           },
-          error: (errorGetReserva) => {
-            console.error('Error al obtener información adicional de la reserva:', errorGetReserva);
-          }
-        });
-      },
           error: (error: any) => {
-            // Error: Manejar el error
             console.log('Error al realizar el pedido:', error);
           },
         });
     }
   }
-  async descargarPDF(cod_reserva: number): Promise<void> {
-    
-     console.log(cod_reserva); // Verifica el valor en la consola
 
-    await this.reservaService.getInformacionReserva(cod_reserva).subscribe({
-      next: (pdfBlob: Blob) => {
-        // Crear un objeto Blob con el contenido del PDF
-        const blob = new Blob([pdfBlob], { type: 'application/pdf' });
+  iniciarTransaccionWebPay(cod_reserva: number, pedidoInfo: PedidoInfo): void {
+    // Datos necesarios para la transacción de WebPay
+    const webpayData = {
+      buyOrder: `ORDER_${cod_reserva}`,
+      sessionId: `SESSION_${cod_reserva}`,
+      amount: pedidoInfo.productos.reduce((total, producto) => total + producto.PRECIO_PRODUCTO * producto.cantidadPedido, 0),
+      returnUrl: 'http://localhost:4200/inicio'
+    };
 
-        // Crear un enlace para descargar el PDF
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = `Reserva_${cod_reserva}.pdf`;
-        link.target = '_blank';
+    // Crear la transacción de WebPay
+    this.reservaService.createTransaction(webpayData).subscribe({
+      next: (webpayResponse) => {
+        // Redireccionar al usuario a la página de WebPay
+        window.location.href = webpayResponse.url + '?token_ws=' + webpayResponse.token;
 
-        console.log(link.href)
-
-        window.open(link.href, '_blank');
-
-        // Agregar el enlace al DOM y simular un clic para iniciar la descarga
-        document.body.appendChild(link);
-        link.click();
-
-        // Eliminar el enlace del DOM
-        document.body.removeChild(link);
+        // Descargar el PDF después de completar la transacción de WebPay
+        this.descargarPDF(cod_reserva);
       },
       error: (error) => {
-        console.error('Error al obtener el PDF de la reserva:', error);
-        // Manejar el error según sea necesario
+        console.error('Error al iniciar la transacción de WebPay:', error);
+      }
+    });
+  }
+
+  descargarPDF(cod_reserva: number): void {
+    // Obtener el PDF después de completar la transacción de WebPay
+    this.reservaService.getInformacionReserva(cod_reserva).subscribe({
+      next: (informacionReserva) => {
+        console.log('Información adicional de la reserva:', informacionReserva);
       },
+      error: (errorGetReserva) => {
+        console.error('Error al obtener información adicional de la reserva:', errorGetReserva);
+      }
     });
   }
 }

@@ -11,6 +11,14 @@ export class ReservaService {
 
   constructor(private http: HttpClient) {}
 
+  createTransaction(data: any): Observable<any> {
+    return this.http.post(`http://localhost:3000/webpay/create`, data);
+  }
+
+  commitTransaction(token: string): Observable<any> {
+    return this.http.post(`http://localhost:3000/webpay/commit`, { token });
+  }
+
   getProductos(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/productos/list`);
   }

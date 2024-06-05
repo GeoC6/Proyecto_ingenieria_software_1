@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const rol_1 = require("./rol");
 const roles_1 = __importDefault(require("../routes/roles"));
 const user_1 = __importDefault(require("../routes/user"));
 const producto_1 = __importDefault(require("../routes/producto"));
@@ -31,7 +32,6 @@ const pagos_1 = __importDefault(require("../routes/pagos"));
 const transaccion_1 = __importDefault(require("../routes/transaccion"));
 const webpayRoutes_1 = __importDefault(require("../routes/webpayRoutes"));
 const user_2 = require("./user");
-const rol_1 = require("./rol");
 const producto_2 = require("./producto");
 const vehiculo_2 = require("./vehiculo");
 const reserva_2 = require("./reserva");
@@ -56,6 +56,7 @@ class Server {
         this.dbConnect();
         this.routes();
         this.startReservaStateCheck();
+        // this.firstUser()
     }
     listen() {
         this.app.listen(this.port, () => {
@@ -123,7 +124,7 @@ class Server {
         return __awaiter(this, void 0, void 0, function* () {
             setInterval(() => __awaiter(this, void 0, void 0, function* () {
                 try {
-                    yield (0, reserva_3.comprobarEstadoReserva)();
+                    (0, reserva_3.comprobarEstadoReserva)();
                 }
                 catch (error) {
                     console.error('Ha ocurrido un error en el servidor', error);
