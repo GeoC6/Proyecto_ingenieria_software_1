@@ -17,10 +17,22 @@ const createTransaction = (buyOrder, sessionId, amount, returnUrl) => __awaiter(
         return response;
     }
     catch (error) {
-        console.error('Error creating transaction:', error);
+        console.error('ERROR creating transaction:', error);
+        throw error;
+    }
+});
+const commitTransaction = (token) => __awaiter(void 0, void 0, void 0, function* () {
+    const tx = new transbank_sdk_1.WebpayPlus.Transaction(new transbank_sdk_1.Options(transbank_sdk_1.IntegrationCommerceCodes.WEBPAY_PLUS, transbank_sdk_1.IntegrationApiKeys.WEBPAY, transbank_sdk_1.Environment.Integration));
+    try {
+        const response = yield tx.commit(token);
+        return response;
+    }
+    catch (error) {
+        console.error('ERROR committing transaction:', error);
         throw error;
     }
 });
 exports.default = {
-    createTransaction
+    createTransaction,
+    commitTransaction
 };

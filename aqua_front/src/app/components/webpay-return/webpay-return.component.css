@@ -1,0 +1,65 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  padding: 20px;
+}
+
+.processing-container,
+.result-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.processing-text,
+.success-text,
+.failure-text {
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.success-container,
+.failure-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.success-icon {
+  font-size: 5em;
+  color: #4CAF50; /* Green */
+}
+
+.failure-icon {
+  font-size: 5em;
+  color: #F44336; /* Red */
+}
+
+.btn-volver {
+  position: absolute;
+  top: 20px;
+  padding: 10px 20px;
+  font-size: 1.5em;
+  color: #fff;
+  background-color: #007BFF; /* Blue */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-volver:hover {
+  background-color: #0056b3; /* Darker Blue */
+}

@@ -1,0 +1,19 @@
+<div class="container">
+  <button (click)="volverInicio()" class="btn-volver">Volver a inicio</button>
+
+  <div [hidden]="pagoExitoso !== null" class="processing-container">
+    <p class="processing-text">Procesando pago...</p>
+  </div>
+
+  <div [hidden]="pagoExitoso === null || !pagoExitoso" class="result-container">
+    <div class="success-container">
+      <i class="fa fa-check-circle success-icon"></i>
+      <p class="success-text">¡Pago exitoso!</p>
+    </div>
+  </div>
+
+  <div [hidden]="pagoExitoso === null || pagoExitoso" class="result-container failure-container">
+    <i class="fa fa-times-circle failure-icon"></i>
+    <p class="failure-text">El pago ha fallado. Por favor, inténtalo de nuevo.</p>
+  </div>
+</div>

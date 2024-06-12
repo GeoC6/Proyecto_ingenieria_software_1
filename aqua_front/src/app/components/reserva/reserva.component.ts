@@ -90,7 +90,7 @@ export class ReservaComponent implements OnInit {
       buyOrder: `ORDER_${cod_reserva}`,
       sessionId: `SESSION_${cod_reserva}`,
       amount: pedidoInfo.productos.reduce((total, producto) => total + producto.PRECIO_PRODUCTO * producto.cantidadPedido, 0),
-      returnUrl: 'http://localhost:4200/inicio'
+      returnUrl: 'http://localhost:4200/webpay-return'
     };
 
     // Crear la transacción de WebPay

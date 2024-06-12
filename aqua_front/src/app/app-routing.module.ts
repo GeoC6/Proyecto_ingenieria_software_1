@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { WebpayReturnComponent } from './components/reserva/return.component';
+import { WebpayReturnComponent } from './components/webpay-return/webpay-return.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { InicioComponent } from './components/inicio/inicio.component';
@@ -28,6 +28,7 @@ import { Reporte3Component } from './components/historial/reporte3/reporte3.comp
 import { AuthGuard } from './utils/auth.guard';
 
 const routes: Routes = [
+  { path: 'reserva', component: ReservaComponent},
   { path: 'reserva', loadChildren: () => import('./components/reserva/reserva.module').then(m => m.ReservaModule) },
   { path: 'webpay-return', component: WebpayReturnComponent },
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },

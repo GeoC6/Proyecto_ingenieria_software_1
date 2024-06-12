@@ -8,13 +8,13 @@ const transaccion_1 = require("../controllers/transaccion");
 const auth_1 = __importDefault(require("./auth"));
 const router = (0, express_1.Router)();
 // Obtener todas las transacciones
-router.get('/list', auth_1.default, transaccion_1.getAllTransacciones);
+router.get('/list',  transaccion_1.getAllTransacciones);
 // Obtener una transacción por su COD
-router.get('/:cod_transaccion', auth_1.default, transaccion_1.getTransaccion);
+router.get('/:cod_transaccion',  transaccion_1.getTransaccion);
 // Crear una nueva transacción
-router.post('/', auth_1.default, transaccion_1.createTransaccion);
+router.post('/',  transaccion_1.createTransaccion);
 // Actualizar una transacción por su COD
-router.put('/:cod_transaccion', auth_1.default, transaccion_1.updateTransaccion);
+router.put('/:cod_transaccion',  transaccion_1.updateTransaccion);
 // Eliminar una transacción por su COD
-router.delete('/:cod_transaccion', auth_1.default, transaccion_1.deleteTransaccion);
+router.delete('/:cod_transaccion',  transaccion_1.deleteTransaccion);
 exports.default = router;

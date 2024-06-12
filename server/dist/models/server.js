@@ -64,7 +64,6 @@ class Server {
         });
     }
     routes() {
-        this.app.use('/api/vehiculos', vehiculo_1.default);
         this.app.use('/api/roles', roles_1.default);
         this.app.use('/api/users', user_1.default);
         this.app.use('/api/productos', producto_1.default);

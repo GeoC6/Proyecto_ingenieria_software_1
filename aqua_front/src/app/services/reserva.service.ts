@@ -16,6 +16,8 @@ export class ReservaService {
   }
 
   commitTransaction(token: string): Observable<any> {
+    console.log(token)
+
     return this.http.post(`http://localhost:3000/webpay/commit`, { token });
   }
 
@@ -23,7 +25,7 @@ export class ReservaService {
     return this.http.get<any[]>(`${this.apiUrl}/productos/list`);
   }
 
-  realizarPedido(cliente: Cliente, pedidoInfo: PedidoInfo): Observable<any> {
+  realizarPedido(cliente: Cliente, pedidoInfo: PedidoInfo): Observable<any> { 
     const url = `${this.apiUrl}/reserva`;
     console.log('Datos enviados al backend:', { cliente, pedidoInfo });
 

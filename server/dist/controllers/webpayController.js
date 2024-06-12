@@ -25,3 +25,21 @@ const createTransaction = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.createTransaction = createTransaction;
+const commitTransaction = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("1111111111111111111111111111");
+    const { token } = req.body;
+    try {
+        const response = yield webpayService_1.default.commitTransaction(token);
+        if (response.response_code === 0 && response.status === 'AUTHORIZED') {
+            res.status(200).json({ message: 'Transacción exitosa', details: response });
+        }
+        else {
+            res.status(400).json({ error: 'Transacción no autorizada', details: response });
+        }
+    }
+    catch (error) {
+        console.error('Error en commitTransaction:', error);
+        res.status(500).json({ error: 'Failed to commit transaction', details: error });
+    }
+});
+exports.commitTransaction = commitTransaction;
