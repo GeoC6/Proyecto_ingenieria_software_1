@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <div *ngIf="!loading" class="body">
+      <img class="logo" src="../../../assets/img/login.png" alt="img login">
+      <h3>Registrar Usuario</h3>
+      <div class="form-floating mb-3 mt-3">
+        <input type="email" [(ngModel)]="correo" class="form-control" placeholder="Ingrese correo electrónico">
+        <label>Correo Electrónico</label>
+      </div>
+      <div class="form-floating mb-3 mt-3">
+        <input type="text" [(ngModel)]="celular" class="form-control" placeholder="Ingrese número de celular">
+        <label>Número de Celular</label>
+      </div>
+      <div class="form-floating mb-3 mt-3">
+        <input type="text" [(ngModel)]="nombre" class="form-control" placeholder="Ingrese nombre">
+        <label>Nombre</label>
+      </div>
+      <div class="form-floating mb-3 mt-3">
+        <input type="text" [(ngModel)]="apellido" class="form-control" placeholder="Ingrese apellido">
+        <label>Apellido</label>
+      </div>
+      <div class="form-floating mb-3 mt-3">
+        <input type="text" [(ngModel)]="direccion" class="form-control" placeholder="Ingrese dirección">
+        <label>Dirección</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="password" [(ngModel)]="password" class="form-control" placeholder="Ingrese contraseña">
+        <label>Contraseña</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="password" [(ngModel)]="confirmPassword" class="form-control" placeholder="Repetir contraseña">
+        <label>Repetir Contraseña</label>
+      </div>
+      <div class="d-grid gap-2 mb-3">
+        <button type="button" (click)="addUser()" class="btn btn-primary btn-lg">Registrar</button>
+      </div>
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
+  </div>
+  

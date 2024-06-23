@@ -9,7 +9,7 @@ const connection_1 = __importDefault(require("../db/connection"));
 const rol_1 = require("./rol");
 exports.Cliente = connection_1.default.define('Cliente', {
     COD_CLIENTE: { type: sequelize_1.DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    CORREO_CLIENTE: { type: sequelize_1.DataTypes.INTEGER },
+    CORREO_CLIENTE: { type: sequelize_1.DataTypes.STRING(255) },
     CELULAR_CLIENTE: { type: sequelize_1.DataTypes.STRING(15) },
     COD_ROL: { type: sequelize_1.DataTypes.INTEGER },
     NOMBRE_CLIENTE: { type: sequelize_1.DataTypes.STRING(255) },

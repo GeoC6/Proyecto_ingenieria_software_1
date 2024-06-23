@@ -54,11 +54,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { WebpayReturnComponent } from './components/reserva/return.component';
+import { RegistroClienteComponent } from './components/registro-clientes/registro-clientes.component';
+import { ClienteService } from './services/cliente.service';
+import { LoginClienteComponent } from './components/login-cliente/logincliente.component';
 
 
 
 @NgModule({
   declarations: [
+    RegistroClienteComponent,
+    LoginClienteComponent,
     AppComponent,
     LoginComponent,
     SignInComponent,
@@ -108,7 +113,7 @@ import { WebpayReturnComponent } from './components/reserva/return.component';
       preventDuplicates: true,
     }), LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, // ToastrModule added
   ],
-  providers: [UsuarioService, ReservaService,
+  providers: [UsuarioService, ReservaService,  ClienteService,
    // { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

@@ -26,8 +26,12 @@ import { Reporte3Component } from './components/historial/reporte3/reporte3.comp
 
 //Guard
 import { AuthGuard } from './utils/auth.guard';
+import { RegistroClienteComponent } from './components/registro-clientes/registro-clientes.component';
+import { LoginClienteComponent } from './components/login-cliente/logincliente.component';
 
 const routes: Routes = [
+  { path: 'registro', component: RegistroClienteComponent },
+  { path: 'loginCliente', component: LoginClienteComponent },
   { path: 'reserva', component: ReservaComponent},
   { path: 'reserva', loadChildren: () => import('./components/reserva/reserva.module').then(m => m.ReservaModule) },
   { path: 'webpay-return', component: WebpayReturnComponent },

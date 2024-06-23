@@ -43,7 +43,7 @@ export class InicioComponent implements OnInit {
 
   logOut() {
     localStorage.removeItem('token');
-    this.router.navigate(['/login'])
+    this.router.navigate(['/loginCliente'])
   }
 
 }

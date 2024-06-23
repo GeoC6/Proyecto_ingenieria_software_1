@@ -6,7 +6,7 @@ export const Cliente = sequelize.define(
     'Cliente',
     {
         COD_CLIENTE: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        CORREO_CLIENTE: { type: DataTypes.INTEGER },
+        CORREO_CLIENTE: { type: DataTypes.STRING(255) },
         CELULAR_CLIENTE: { type: DataTypes.STRING(15) },
         COD_ROL: { type: DataTypes.INTEGER },
         NOMBRE_CLIENTE: { type: DataTypes.STRING(255) },
