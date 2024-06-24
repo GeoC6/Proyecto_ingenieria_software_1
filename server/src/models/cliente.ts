@@ -6,12 +6,12 @@ export const Cliente = sequelize.define(
     'Cliente',
     {
         COD_CLIENTE: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        CORREO_CLIENTE: { type: DataTypes.STRING(255) },
-        CELULAR_CLIENTE: { type: DataTypes.STRING(15) },
-        COD_ROL: { type: DataTypes.INTEGER },
-        NOMBRE_CLIENTE: { type: DataTypes.STRING(255) },
-        APELLIDO_CLIENTE: { type: DataTypes.STRING(255) },
-        DIRECCION_CLIENTE: { type: DataTypes.STRING(255) },
+        CORREO_CLIENTE: { type: DataTypes.STRING(255), allowNull: false, unique: true },
+        CONTRASENA: { type: DataTypes.STRING(255), allowNull: false },
+        CELULAR_CLIENTE: { type: DataTypes.STRING(15), allowNull: false },
+        NOMBRE_CLIENTE: { type: DataTypes.STRING(255), allowNull: false },
+        APELLIDO_CLIENTE: { type: DataTypes.STRING(255), allowNull: false },
+        DIRECCION_CLIENTE: { type: DataTypes.STRING(255), allowNull: false }
     },
     {
         freezeTableName: true,
@@ -19,4 +19,3 @@ export const Cliente = sequelize.define(
     }
 );
 
-Cliente.belongsTo(Rol, { foreignKey: 'COD_ROL' });

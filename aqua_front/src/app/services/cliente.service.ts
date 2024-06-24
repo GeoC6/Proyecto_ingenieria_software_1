@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Cliente } from '../components/registro-clientes/registro-clientes.component'; // Adjust the path as necessary
+
+// Definición de la interfaz Cliente
+export interface Cliente {
+  correo_cliente: string;
+  contrasena: string;
+  celular_cliente: string;
+  nombre_cliente: string;
+  apellido_cliente: string;
+  direccion_cliente: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
 
-  private apiUrl = 'http://localhost:3000/api/cliente'; // Adjust the URL as necessary
+  private apiUrl = 'http://localhost:3000/api/cliente'; // Ajustar la URL según sea necesario
 
   constructor(private http: HttpClient) { }
 

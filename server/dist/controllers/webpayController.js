@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createTransaction = void 0;
+exports.commitTransaction = exports.createTransaction = void 0;
 const webpayService_1 = __importDefault(require("../services/webpayService"));
 const createTransaction = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { buyOrder, sessionId, amount, returnUrl } = req.body;
@@ -26,20 +26,13 @@ const createTransaction = (req, res) => __awaiter(void 0, void 0, void 0, functi
 });
 exports.createTransaction = createTransaction;
 const commitTransaction = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("1111111111111111111111111111");
     const { token } = req.body;
     try {
         const response = yield webpayService_1.default.commitTransaction(token);
-        if (response.response_code === 0 && response.status === 'AUTHORIZED') {
-            res.status(200).json({ message: 'Transacción exitosa', details: response });
-        }
-        else {
-            res.status(400).json({ error: 'Transacción no autorizada', details: response });
-        }
+        res.status(200).json(response);
     }
     catch (error) {
-        console.error('Error en commitTransaction:', error);
-        res.status(500).json({ error: 'Failed to commit transaction', details: error });
+        res.status(500).json({ error: 'Failed to commit transaction' });
     }
 });
 exports.commitTransaction = commitTransaction;

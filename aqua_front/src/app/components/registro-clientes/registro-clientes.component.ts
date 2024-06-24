@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, of } from 'rxjs';
-import { ClienteService } from 'src/app/services/cliente.service'; // Adjust the path as necessary
+import { ClienteService } from 'src/app/services/cliente.service';
 import { ErrorService } from 'src/app/services/error.service';
 
 @Component({
@@ -32,34 +32,39 @@ export class RegistroClienteComponent implements OnInit {
 
   addUser() {
     // Validate the form inputs
-    if (!this.correo || !this.celular || !this.nombre || !this.apellido || !this.direccion || !this.password || !this.confirmPassword) {
+    if (!this.correo || !this.password || !this.celular || !this.nombre || !this.apellido || !this.direccion || !this.confirmPassword) {
       this.toastr.error('Todos los campos son obligatorios', 'Error');
       return;
     }
 
     // Validate that passwords match
     if (this.password !== this.confirmPassword) {
-      this.toastr.error('Las passwords ingresadas son distintas', 'Error');
+      this.toastr.error('Las contraseñas ingresadas son distintas', 'Error');
       return;
     }
 
-    // Create the client object
-    const cliente: Cliente = {
-      CORREO_CLIENTE: this.correo,
-      CELULAR_CLIENTE: this.password, // Assuming the password is to be hashed
-      NOMBRE_CLIENTE: this.nombre,
-      APELLIDO_CLIENTE: this.apellido,
-      DIRECCION_CLIENTE: this.direccion
+    // Create the client object as expected by the backend
+    const cliente = {
+      correo_cliente: this.correo,
+      contrasena: this.password,
+      celular_cliente: this.celular,
+      nombre_cliente: this.nombre,
+      apellido_cliente: this.apellido,
+      direccion_cliente: this.direccion
     };
 
     this.loading = true;
 
     this._clienteService.createCliente(cliente).pipe(
-      catchError((clienteError) => {
-        console.error('Error en el servicio de clientes:', clienteError);
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error en el servicio de clientes:', error);
         this.loading = false;
-        this._errorService.msjError(clienteError);
-        return of(null); // Return an empty observable to continue
+        let errorMsg = 'Error al registrar usuario';
+        if (error.error && error.error.msg) {
+          errorMsg = error.error.msg;
+        }
+        this.toastr.error(errorMsg, 'Error');
+        return of(null);
       })
     ).subscribe(response => {
       this.loading = false;
@@ -69,12 +74,4 @@ export class RegistroClienteComponent implements OnInit {
       }
     });
   }
-}
-
-export interface Cliente {
-  CORREO_CLIENTE: string;
-  CELULAR_CLIENTE: string;
-  NOMBRE_CLIENTE: string;
-  APELLIDO_CLIENTE: string;
-  DIRECCION_CLIENTE: string;
 }

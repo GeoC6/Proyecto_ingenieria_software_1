@@ -19,7 +19,7 @@ const getAllPagos = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     try {
         const allPagos = yield pagos_1.pagos.findAll({
             include: [
-                { model: facturas_1.Facturas, attributes: ['COD_FACTURA'] },
+                { model: facturas_1.Facturas, attributes: ['COD_FACTURA'] }, // Se corrige el nombre del modelo a Facturas
                 { model: metodos_de_pago_1.metodos_de_pago, attributes: ['TIPO', 'DETALLE'] },
                 { model: deposito_1.deposito, attributes: ['NOMBRE_BANCO', 'NUMERO_DE_CUENTA'] },
             ],
@@ -36,7 +36,7 @@ const getPago = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const pago = yield pagos_1.pagos.findByPk(req.params.id, {
             include: [
-                { model: facturas_1.Facturas, attributes: ['COD_FACTURA'] },
+                { model: facturas_1.Facturas, attributes: ['COD_FACTURA'] }, // Se corrige el nombre del modelo a Facturas
                 { model: metodos_de_pago_1.metodos_de_pago, attributes: ['TIPO', 'DETALLE'] },
                 { model: deposito_1.deposito, attributes: ['NOMBRE_BANCO', 'NUMERO_DE_CUENTA'] },
             ],
