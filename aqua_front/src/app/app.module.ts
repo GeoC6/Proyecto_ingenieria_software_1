@@ -41,7 +41,7 @@ import { EmpleadoComponent } from './components/empleado/empleado.component';
 import { UempleadosComponent } from './components/uempleados/usuarios.component';
 import { VempleadosComponent } from './components/vempleados/vehiculo.component';
 import { ReservaService } from './services/reserva.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservaModule } from './components/reserva/reserva.module';
 import { ReservaComponent } from './components/reserva/reserva.component';
 import { InventarioCreateComponent } from './components/inventario/create/create.component';
@@ -91,6 +91,7 @@ import { LoginClienteComponent } from './components/login-cliente/logincliente.c
     WebpayReturnComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

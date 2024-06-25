@@ -1,75 +1,58 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/interfaces/user';
-import { ErrorService } from 'src/app/services/error.service';
-import { UserService } from 'src/app/services/user.service';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
-  selector: 'app-logincliente',
-  templateUrl: './loginCliente.component.html',
-  styleUrls: ['./loginCliente.component.css']
+  selector: 'app-login-cliente',
+  templateUrl: './logincliente.component.html',
+  styleUrls: ['./logincliente.component.css']
 })
-export class LoginClienteComponent implements OnInit {
-  username: string = '';
-  password: string = '';
-  rol: number = 0;
+export class LoginClienteComponent {
+  correo: string = '';
+  contrasena: string = '';
   loading: boolean = false;
+  capsLockOn: boolean = false;
+  showPassword: boolean = false;
 
-  constructor(private toastr: ToastrService,
-    private _userService: UserService,
-    private router: Router,
-    private _errorService: ErrorService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(
+    private toastr: ToastrService,
+    private clienteService: ClienteService,
+    private router: Router
+  ) {}
 
   login() {
-
-    // Validamos que el usuario ingrese datos
-    if (this.username == '' || this.password == '') {
-      this.toastr.error('Todos los campos son obligatorios', 'Error');
-      return
-    }
-    
-
-    // Creamos el body
-    const user: User = {
-      rut_usuario: this.username,
-      contrasena: this.password,
-      cod_rol: this.rol,
+    if (!this.correo || !this.contrasena) {
+      this.toastr.error('Correo y contraseña son obligatorios', 'Error');
+      return;
     }
 
     this.loading = true;
-    this._userService.login(user).subscribe({
-      next: () => {
-        // Obtén el rol del token
-        const userRol = this._userService.getRolFromToken();
-  
-        // Verifica el rol y redirige al componente correspondiente
-        if (userRol === 1) {
-          this.router.navigate(['/admin']);
+
+    const credentials = {
+      correo_cliente: this.correo,
+      contrasena: this.contrasena
+    };
+
+    this.clienteService.loginCliente(credentials).subscribe(
+      response => {
+        this.loading = false;
+        if (response && response.token) {
+          this.toastr.success('Login exitoso', 'Bienvenido');
+          this.router.navigate(['/perfil']);
         } else {
-          this.router.navigate(['/empleado']);
+          this.toastr.error('Error en el servicio de login', 'Error');
         }
       },
-      error: (e: HttpErrorResponse) => {
-        this._errorService.msjError(e);
+      error => {
         this.loading = false;
-      },
-    });
-    
+        this.toastr.error('Error en el servicio de login', 'Error');
+        console.error('Error en el servicio de login:', error);
+      }
+    );
   }
-  showPassword: boolean = false;
 
-togglePasswordVisibility() {
-    this.showPassword = !this.showPassword;
-}
-
-capsLockOn: boolean = false;
-
-checkCapsLock(event: KeyboardEvent) {
-    this.capsLockOn = event.getModifierState('CapsLock');
-}
+  checkCapsLock(event: KeyboardEvent) {
+    this.capsLockOn = event.getModifierState && event.getModifierState('CapsLock');
+  }
 }

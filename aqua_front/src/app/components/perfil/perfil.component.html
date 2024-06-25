@@ -1,0 +1,64 @@
+<div class="container">
+  <h2 class="mb-4">Perfil del Cliente</h2>
+
+  <form (submit)="onSubmit($event)">
+    <div class="mb-3">
+      <label for="nombre_cliente" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="nombre_cliente" [value]="clienteInfo.nombre_cliente" (input)="clienteInfo.nombre_cliente = $any($event.target).value" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="apellido_cliente" class="form-label">Apellido</label>
+      <input type="text" class="form-control" id="apellido_cliente" [value]="clienteInfo.apellido_cliente" (input)="clienteInfo.apellido_cliente = $any($event.target).value" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="correo_cliente" class="form-label">Correo</label>
+      <input type="email" class="form-control" id="correo_cliente" [value]="clienteInfo.correo_cliente" (input)="clienteInfo.correo_cliente = $any($event.target).value" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="celular_cliente" class="form-label">Celular</label>
+      <input type="text" class="form-control" id="celular_cliente" [value]="clienteInfo.celular_cliente" (input)="clienteInfo.celular_cliente = $any($event.target).value" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="direccion_cliente" class="form-label">Dirección</label>
+      <input type="text" class="form-control" id="direccion_cliente" [value]="clienteInfo.direccion_cliente" (input)="clienteInfo.direccion_cliente = $any($event.target).value" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="contrasena" class="form-label">Contraseña (dejar en blanco para mantener la actual)</label>
+      <input type="password" class="form-control" id="contrasena" [value]="clienteInfo.contrasena" (input)="clienteInfo.contrasena = $any($event.target).value">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar Información</button>
+  </form>
+
+  <!-- Esta sección está comentada ya que mencionaste que se añadirá después -->
+  <!-- <h3 class="mt-5 mb-3">Historial de Pedidos</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Fecha</th>
+        <th>Detalle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pedido of pedidos; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ pedido.fecha | date }}</td>
+        <td>{{ pedido.detalle }}</td>
+      </tr>
+    </tbody>
+  </table> -->
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+</ng-template>

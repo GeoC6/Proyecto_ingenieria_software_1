@@ -1,21 +1,20 @@
 <div class="wrapper">
-  <div *ngIf="!loading" class="body">
-      <img class="logo" src="../../../assets/img/login.png" alt="img login">
-      <h3 class="mb-2">Login</h3>
-      <div class="form-floating mb-3 mt-3">
-          <input type="text" [(ngModel)]="username" autocomplete="false" class="form-control" placeholder="Ingrese usuario">
-          <label>Usuario</label>
-      </div>
-      <div class="form-floating mb-3">
-          <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" autocomplete="false" class="form-control" placeholder="Ingrese password" (keyup)="checkCapsLock($event)" (keydown.enter)="login()">
-          <label>Password</label>
-         
-          <div *ngIf="capsLockOn" class="text-danger">¡Bloqueo de mayúsculas está activado!</div>
-      </div>
-      
-      <div class="d-grid gap-2">
-          <button type="button" class="btn btn-primary btn-lg" (click)="login()">Aceptar</button>
-      </div>
+    <div *ngIf="!loading" class="body">
+        <img class="logo" src="../../../assets/img/login.png" alt="img login">
+        <h3 class="mb-2">Login</h3>
+        <div class="form-floating mb-3 mt-3">
+            <input type="email" [(ngModel)]="correo" autocomplete="off" class="form-control" placeholder="Ingrese correo">
+            <label>Correo</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="contrasena" autocomplete="off" class="form-control" placeholder="Ingrese contraseña" (keyup)="checkCapsLock($event)" (keydown.enter)="login()">
+            <label>Contraseña</label>
+            <div *ngIf="capsLockOn" class="text-danger">¡Bloqueo de mayúsculas está activado!</div>
+        </div>
+        <div class="d-grid gap-2">
+            <button type="button" class="btn btn-primary btn-lg" (click)="login()">Aceptar</button>
+        </div>
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
   </div>
-  <app-spinner *ngIf="loading"></app-spinner>
-</div>
+  

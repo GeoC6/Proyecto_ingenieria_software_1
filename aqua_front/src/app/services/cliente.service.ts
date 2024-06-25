@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 
-// Definición de la interfaz Cliente
 export interface Cliente {
   correo_cliente: string;
   contrasena: string;
@@ -17,12 +17,13 @@ export interface Cliente {
 })
 export class ClienteService {
 
-  private apiUrl = 'http://localhost:3000/api/cliente'; // Ajustar la URL según sea necesario
+  private apiUrl = 'http://localhost:3000/api/cliente';
+  private clienteActual: Cliente | null = null;
 
   constructor(private http: HttpClient) { }
 
   createCliente(cliente: Cliente): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/`, cliente);
+    return this.http.post<any>(`${this.apiUrl}`, cliente);
   }
 
   getClientes(): Observable<Cliente[]> {
@@ -33,15 +34,34 @@ export class ClienteService {
     return this.http.get<Cliente>(`${this.apiUrl}/${id}`);
   }
 
-  updateCliente(id: number, cliente: Cliente): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, cliente);
+  updateCliente(correoCliente: string, cliente: Cliente): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${correoCliente}`, cliente);
   }
 
   deleteCliente(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 
-  loginCliente(credentials: { correo_cliente: string, celular_cliente: string }): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login-cliente`, credentials);
+  loginCliente(credentials: { correo_cliente: string; contrasena: string }): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
+      tap(response => {
+        if (response.token && response.cliente) {
+          localStorage.setItem('token', response.token);
+          this.clienteActual = response.cliente;
+        }
+      }),
+      catchError(error => {
+        console.error('Error en el servicio de login:', error);
+        return of(null); // Manejo de error con observables
+      })
+    );
+  }
+
+  getClienteActual(): Cliente | null {
+    return this.clienteActual;
+  }
+
+  setClienteActual(cliente: Cliente) {
+    this.clienteActual = cliente;
   }
 }
