@@ -22,14 +22,9 @@ const vehiculo_1 = __importDefault(require("../routes/vehiculo"));
 const reserva_1 = __importDefault(require("../routes/reserva"));
 const detalle_reserva_1 = __importDefault(require("../routes/detalle_reserva"));
 const cliente_1 = __importDefault(require("../routes/cliente"));
-const facturas_1 = __importDefault(require("../routes/facturas"));
 const carrito_1 = __importDefault(require("../routes/carrito"));
-const detalle_factura_1 = __importDefault(require("../routes/detalle_factura"));
-const metodos_de_pago_1 = __importDefault(require("../routes/metodos_de_pago"));
-const deposito_1 = __importDefault(require("../routes/deposito"));
-const datos_de_tarjeta_1 = __importDefault(require("../routes/datos_de_tarjeta"));
 const pagos_1 = __importDefault(require("../routes/pagos"));
-const transaccion_1 = __importDefault(require("../routes/transaccion"));
+const boleta_1 = __importDefault(require("../routes/boleta"));
 const webpayRoutes_1 = __importDefault(require("../routes/webpayRoutes"));
 const user_2 = require("./user");
 const producto_2 = require("./producto");
@@ -39,14 +34,9 @@ const detalle_reserva_2 = require("./detalle_reserva");
 const reserva_3 = require("../controllers/reserva");
 const cliente_2 = require("./cliente");
 const carrito_2 = require("./carrito");
-const facturas_2 = require("./facturas");
-const detalle_factura_2 = require("./detalle_factura");
 const user_3 = require("../controllers/user");
-const metodos_de_pago_2 = require("./metodos_de_pago");
-const deposito_2 = require("./deposito");
-const datos_de_tarjeta_2 = require("./datos_de_tarjeta");
 const pagos_2 = require("./pagos");
-const transaccion_2 = require("./transaccion");
+const boleta_2 = require("./boleta");
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -70,15 +60,10 @@ class Server {
         this.app.use('/api/vehiculos', vehiculo_1.default);
         this.app.use('/api/reserva', reserva_1.default);
         this.app.use('/api/det_reserva_producto', detalle_reserva_1.default);
-        this.app.use('/api/metodos_de_pago', metodos_de_pago_1.default);
-        this.app.use('/api/deposito', deposito_1.default);
-        this.app.use('/api/tarjeta', datos_de_tarjeta_1.default);
         this.app.use('/api/pago', pagos_1.default);
-        this.app.use('/api/transacciones', transaccion_1.default);
+        this.app.use('/api/boletas', boleta_1.default);
         this.app.use('/api/cliente', cliente_1.default);
         this.app.use('/api/carrito', carrito_1.default);
-        this.app.use('/api/facturas', facturas_1.default);
-        this.app.use('/api/detalle_factura', detalle_factura_1.default);
         this.app.use('/webpay', webpayRoutes_1.default);
     }
     midlewares() {
@@ -94,14 +79,9 @@ class Server {
                 yield producto_2.Producto.sync();
                 yield reserva_2.Reserva.sync();
                 yield detalle_reserva_2.DetalleReserva.sync();
-                yield metodos_de_pago_2.metodos_de_pago.sync();
-                yield deposito_2.deposito.sync();
                 yield pagos_2.pagos.sync();
-                yield transaccion_2.transaccion.sync();
-                yield datos_de_tarjeta_2.datos_de_tarjeta.sync();
+                yield boleta_2.boleta.sync();
                 yield cliente_2.Cliente.sync();
-                yield facturas_2.Facturas.sync();
-                yield detalle_factura_2.Detalle_Factura.sync();
                 yield carrito_2.Carrito.sync();
             }
             catch (error) {

@@ -9,19 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deletePago = exports.updatePago = exports.createPago = exports.getPago = exports.getAllPagos = void 0;
+exports.deletePago = exports.updatePago = exports.createPago = exports.getPagosByCliente = exports.getPago = exports.getAllPagos = void 0;
 const pagos_1 = require("../models/pagos");
-const facturas_1 = require("../models/facturas"); // Se importa el modelo de facturas
-const metodos_de_pago_1 = require("../models/metodos_de_pago");
-const deposito_1 = require("../models/deposito");
+const cliente_1 = require("../models/cliente");
 // Obtener todos los pagos
 const getAllPagos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const allPagos = yield pagos_1.pagos.findAll({
             include: [
-                { model: facturas_1.Facturas, attributes: ['COD_FACTURA'] }, // Se corrige el nombre del modelo a Facturas
-                { model: metodos_de_pago_1.metodos_de_pago, attributes: ['TIPO', 'DETALLE'] },
-                { model: deposito_1.deposito, attributes: ['NOMBRE_BANCO', 'NUMERO_DE_CUENTA'] },
+                { model: cliente_1.Cliente, attributes: ['NOMBRE', 'APELLIDO'] },
             ],
         });
         res.json(allPagos);
@@ -36,9 +32,7 @@ const getPago = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const pago = yield pagos_1.pagos.findByPk(req.params.id, {
             include: [
-                { model: facturas_1.Facturas, attributes: ['COD_FACTURA'] }, // Se corrige el nombre del modelo a Facturas
-                { model: metodos_de_pago_1.metodos_de_pago, attributes: ['TIPO', 'DETALLE'] },
-                { model: deposito_1.deposito, attributes: ['NOMBRE_BANCO', 'NUMERO_DE_CUENTA'] },
+                { model: cliente_1.Cliente, attributes: ['NOMBRE', 'APELLIDO'] },
             ],
         });
         if (!pago) {
@@ -51,11 +45,28 @@ const getPago = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getPago = getPago;
+// Obtener pagos por COD_CLIENTE
+const getPagosByCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { codCliente } = req.params;
+        const pagosByCliente = yield pagos_1.pagos.findAll({
+            where: { COD_CLIENTE: codCliente },
+            include: [
+                { model: cliente_1.Cliente, attributes: ['NOMBRE', 'APELLIDO'] },
+            ],
+        });
+        res.json(pagosByCliente);
+    }
+    catch (error) {
+        res.status(500).json({ message: 'Error al buscar pagos del cliente' });
+    }
+});
+exports.getPagosByCliente = getPagosByCliente;
 // Crear un nuevo pago
 const createPago = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { COD_FACTURA, COD_METODO_DE_PAGO, COD_BANCO, MONTO_PAGADO, METODO_PAGO, CONFIRMACION_PAGO } = req.body;
-        const nuevoPago = yield pagos_1.pagos.create({ COD_FACTURA, COD_METODO_DE_PAGO, COD_BANCO, MONTO_PAGADO, METODO_PAGO, CONFIRMACION_PAGO });
+        const { COD_CLIENTE, BUY_ORDER, AMOUNT, STATUS } = req.body;
+        const nuevoPago = yield pagos_1.pagos.create({ COD_CLIENTE, BUY_ORDER, AMOUNT, STATUS });
         res.status(201).json(nuevoPago);
     }
     catch (error) {
@@ -70,8 +81,8 @@ const updatePago = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         if (!pago) {
             return res.status(404).json({ message: 'Pago no encontrado' });
         }
-        const { COD_FACTURA, COD_METODO_DE_PAGO, COD_BANCO, MONTO_PAGADO, METODO_PAGO, CONFIRMACION_PAGO } = req.body;
-        yield pago.update({ COD_FACTURA, COD_METODO_DE_PAGO, COD_BANCO, MONTO_PAGADO, METODO_PAGO, CONFIRMACION_PAGO });
+        const { BUY_ORDER, AMOUNT, STATUS } = req.body;
+        yield pago.update({ BUY_ORDER, AMOUNT, STATUS });
         res.json(pago);
     }
     catch (error) {

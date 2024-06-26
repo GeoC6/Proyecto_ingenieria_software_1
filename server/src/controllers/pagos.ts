@@ -1,17 +1,13 @@
 import { Request, Response } from 'express';
 import { pagos } from '../models/pagos';
-import { Facturas } from '../models/facturas'; // Se importa el modelo de facturas
-import { metodos_de_pago } from '../models/metodos_de_pago';
-import { deposito } from '../models/deposito';
+import { Cliente } from '../models/cliente';
 
 // Obtener todos los pagos
 export const getAllPagos = async (req: Request, res: Response) => {
   try {
     const allPagos = await pagos.findAll({
       include: [
-        { model: Facturas, attributes: ['COD_FACTURA'] }, // Se corrige el nombre del modelo a Facturas
-        { model: metodos_de_pago, attributes: ['TIPO', 'DETALLE'] },
-        { model: deposito, attributes: ['NOMBRE_BANCO', 'NUMERO_DE_CUENTA'] },
+        { model: Cliente, attributes: ['NOMBRE', 'APELLIDO'] },
       ],
     });
     res.json(allPagos);
@@ -25,9 +21,7 @@ export const getPago = async (req: Request, res: Response) => {
   try {
     const pago = await pagos.findByPk(req.params.id, {
       include: [
-        { model: Facturas, attributes: ['COD_FACTURA'] }, // Se corrige el nombre del modelo a Facturas
-        { model: metodos_de_pago, attributes: ['TIPO', 'DETALLE'] },
-        { model: deposito, attributes: ['NOMBRE_BANCO', 'NUMERO_DE_CUENTA'] },
+        { model: Cliente, attributes: ['NOMBRE', 'APELLIDO'] },
       ],
     });
     if (!pago) {
@@ -39,11 +33,27 @@ export const getPago = async (req: Request, res: Response) => {
   }
 };
 
+// Obtener pagos por COD_CLIENTE
+export const getPagosByCliente = async (req: Request, res: Response) => {
+  try {
+    const { codCliente } = req.params;
+    const pagosByCliente = await pagos.findAll({
+      where: { COD_CLIENTE: codCliente },
+      include: [
+        { model: Cliente, attributes: ['NOMBRE', 'APELLIDO'] },
+      ],
+    });
+    res.json(pagosByCliente);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al buscar pagos del cliente' });
+  }
+};
+
 // Crear un nuevo pago
 export const createPago = async (req: Request, res: Response) => {
   try {
-    const { COD_FACTURA, COD_METODO_DE_PAGO, COD_BANCO, MONTO_PAGADO, METODO_PAGO, CONFIRMACION_PAGO } = req.body;
-    const nuevoPago = await pagos.create({ COD_FACTURA, COD_METODO_DE_PAGO, COD_BANCO, MONTO_PAGADO, METODO_PAGO, CONFIRMACION_PAGO });
+    const { COD_CLIENTE, BUY_ORDER, AMOUNT, STATUS } = req.body;
+    const nuevoPago = await pagos.create({ COD_CLIENTE, BUY_ORDER, AMOUNT, STATUS });
     res.status(201).json(nuevoPago);
   } catch (error) {
     res.status(400).json({ message: 'Error al crear pago' });
@@ -57,8 +67,8 @@ export const updatePago = async (req: Request, res: Response) => {
     if (!pago) {
       return res.status(404).json({ message: 'Pago no encontrado' });
     }
-    const { COD_FACTURA, COD_METODO_DE_PAGO, COD_BANCO, MONTO_PAGADO, METODO_PAGO, CONFIRMACION_PAGO } = req.body;
-    await pago.update({ COD_FACTURA, COD_METODO_DE_PAGO, COD_BANCO, MONTO_PAGADO, METODO_PAGO, CONFIRMACION_PAGO });
+    const { BUY_ORDER, AMOUNT, STATUS } = req.body;
+    await pago.update({ BUY_ORDER, AMOUNT, STATUS });
     res.json(pago);
   } catch (error) {
     res.status(400).json({ message: 'Error al actualizar pago' });

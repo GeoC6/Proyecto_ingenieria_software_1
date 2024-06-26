@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllPagos, getPago, createPago, updatePago, deletePago } from '../controllers/pagos';
+import { getAllPagos, getPago, getPagosByCliente, createPago, updatePago, deletePago } from '../controllers/pagos';
 import auth from './auth';
 
 const router = Router();
@@ -9,6 +9,9 @@ router.get('/list', auth, getAllPagos);
 
 // Obtener un pago por su código
 router.get('/:cod_pago', auth, getPago);
+
+// Obtener los pagos por el código de cliente
+router.get('/cliente/:codCliente', auth, getPagosByCliente);
 
 // Crear un nuevo pago
 router.post('/', auth, createPago);

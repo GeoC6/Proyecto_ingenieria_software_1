@@ -3,14 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pagos = void 0;
+exports.boleta = void 0;
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../db/connection"));
+const pagos_1 = require("./pagos");
 const cliente_1 = require("./cliente");
-exports.pagos = connection_1.default.define('pagos', {
-    COD_PAGO: { type: sequelize_1.DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+exports.boleta = connection_1.default.define('boleta', {
+    COD_BOLETA: { type: sequelize_1.DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     COD_CLIENTE: { type: sequelize_1.DataTypes.INTEGER },
-    BUY_ORDER: { type: sequelize_1.DataTypes.INTEGER },
+    COD_PAGO: { type: sequelize_1.DataTypes.INTEGER },
     TRANSACTION_DATE: { type: sequelize_1.DataTypes.DATEONLY, defaultValue: sequelize_1.DataTypes.NOW },
     AMOUNT: { type: sequelize_1.DataTypes.INTEGER },
     STATUS: { type: sequelize_1.DataTypes.STRING(255) },
@@ -18,4 +19,5 @@ exports.pagos = connection_1.default.define('pagos', {
     freezeTableName: true,
     timestamps: false,
 });
-exports.pagos.belongsTo(cliente_1.Cliente, { foreignKey: 'COD_CLIENTE' });
+exports.boleta.belongsTo(pagos_1.pagos, { foreignKey: 'COD_PAGO' });
+exports.boleta.belongsTo(cliente_1.Cliente, { foreignKey: 'COD_CLIENTE' });
