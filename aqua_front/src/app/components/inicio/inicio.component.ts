@@ -24,7 +24,7 @@ export class InicioComponent implements OnInit {
  
    validateToken() {
      if (localStorage.getItem("token") === null) {
-       this.router.navigate(['/login'])
+       this.router.navigate(['/inicio'])
      }
    }
 

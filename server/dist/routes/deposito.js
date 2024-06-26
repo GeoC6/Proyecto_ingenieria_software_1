@@ -8,13 +8,13 @@ const deposito_1 = require("../controllers/deposito");
 const auth_1 = __importDefault(require("./auth"));
 const router = (0, express_1.Router)();
 // Obtener todos los depósitos
-router.get('/list', auth_1.default, deposito_1.getAllDepositos);
+router.get('/list', deposito_1.getAllDepositos);
 // Obtener un depósito por su código de banco
-router.get('/:cod_banco', auth_1.default, deposito_1.getDeposito);
+router.get('/:cod_banco', deposito_1.getDeposito);
 // Crear un nuevo depósito
-router.post('/', auth_1.default, deposito_1.createDeposito);
+router.post('/', deposito_1.createDeposito);
 // Actualizar un depósito por su código de banco
-router.put('/:cod_banco', auth_1.default, deposito_1.updateDeposito);
+router.put('/:cod_banco', deposito_1.updateDeposito);
 // Eliminar un depósito por su código de banco
-router.delete('/:cod_banco', auth_1.default, deposito_1.deleteDeposito);
+router.delete('/:cod_banco', deposito_1.deleteDeposito);
 exports.default = router;
