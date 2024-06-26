@@ -62,7 +62,9 @@ export const getClientes = async (req: Request, res: Response) => {
 };
 
 export const loginCliente = async (req: Request, res: Response) => {
-    const { correo_cliente, contrasena } = req.body;
+    // const { correo_cliente, contrasena } = req.body;
+    const correo_cliente = req.body.correo_cliente;
+    const contrasena = req.body.contrasena;
 
     if (!correo_cliente || !contrasena) {
         return res.status(400).json({ msg: 'Correo y contraseña son obligatorios' });
@@ -70,7 +72,6 @@ export const loginCliente = async (req: Request, res: Response) => {
 
     try {
         const cliente: any = await Cliente.findOne({ where: { CORREO_CLIENTE: correo_cliente } });
-
         if (!cliente) {
             return res.status(401).json({
                 msg: 'El correo ingresado no es válido'
@@ -88,7 +89,7 @@ export const loginCliente = async (req: Request, res: Response) => {
             correo_cliente: correo_cliente
         }, process.env.SECRET_KEY || 'PRUEBA1');
 
-        res.json({ token });
+        res.json({ token,  cliente});
     } catch (error) {
         res.status(500).json({
             msg: 'Error al iniciar sesión',
@@ -107,7 +108,8 @@ export const getCliente = async (req: Request, res: Response) => {
                 'CELULAR_CLIENTE',
                 'NOMBRE_CLIENTE',
                 'APELLIDO_CLIENTE',
-                'DIRECCION_CLIENTE'
+                'DIRECCION_CLIENTE',
+                // 'CODIGO_CLIENTE'
             ],
             where: { CORREO_CLIENTE: correo_cliente }
         });

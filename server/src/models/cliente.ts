@@ -10,7 +10,8 @@ export const Cliente = sequelize.define(
         CELULAR_CLIENTE: { type: DataTypes.STRING(15), allowNull: false },
         NOMBRE_CLIENTE: { type: DataTypes.STRING(255), allowNull: false },
         APELLIDO_CLIENTE: { type: DataTypes.STRING(255), allowNull: false },
-        DIRECCION_CLIENTE: { type: DataTypes.STRING(255), allowNull: false }
+        DIRECCION_CLIENTE: { type: DataTypes.STRING(255), allowNull: false },
+        COD_CLIENTE: { type: DataTypes.STRING(255), allowNull: false },
     },
     {
         freezeTableName: true,

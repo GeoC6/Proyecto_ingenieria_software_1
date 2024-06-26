@@ -9,7 +9,7 @@ const connection_1 = __importDefault(require("../db/connection"));
 const cliente_1 = require("./cliente");
 exports.Facturas = connection_1.default.define('Facturas', {
     COD_FACTURA: { type: sequelize_1.DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    COD_CLIENTE: { type: sequelize_1.DataTypes.INTEGER },
+    CORREO_CLIENTE: { type: sequelize_1.DataTypes.INTEGER },
     FECHA_EMISION: { type: sequelize_1.DataTypes.INTEGER },
     FECHA_VENCIMIENTO: { type: sequelize_1.DataTypes.INTEGER },
     MONTO_TOTAL: { type: sequelize_1.DataTypes.INTEGER },
@@ -18,4 +18,4 @@ exports.Facturas = connection_1.default.define('Facturas', {
     freezeTableName: true,
     timestamps: false,
 });
-exports.Facturas.belongsTo(cliente_1.Cliente, { foreignKey: 'COD_CLIENTE' });
+exports.Facturas.belongsTo(cliente_1.Cliente, { foreignKey: 'CORREO_CLIENTE' });

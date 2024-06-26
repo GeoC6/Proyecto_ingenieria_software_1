@@ -23,10 +23,10 @@ const getFacturas = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.getFacturas = getFacturas;
 const newFactura = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { COD_CLIENTE, FECHA_EMISION, FECHA_VENCIMIENTO, MONTO_TOTAL, ESTADO } = req.body;
+    const { CORREO_CLIENTE, FECHA_EMISION, FECHA_VENCIMIENTO, MONTO_TOTAL, ESTADO } = req.body;
     try {
         yield facturas_1.Facturas.create({
-            COD_CLIENTE,
+            CORREO_CLIENTE,
             FECHA_EMISION,
             FECHA_VENCIMIENTO,
             MONTO_TOTAL,
@@ -46,7 +46,7 @@ const newFactura = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.newFactura = newFactura;
 const updateFactura = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { COD_FACTURA } = req.params;
-    const { COD_CLIENTE, FECHA_EMISION, FECHA_VENCIMIENTO, MONTO_TOTAL, ESTADO } = req.body;
+    const { CORREO_CLIENTE, FECHA_EMISION, FECHA_VENCIMIENTO, MONTO_TOTAL, ESTADO } = req.body;
     try {
         const factura = yield facturas_1.Facturas.findByPk(COD_FACTURA);
         if (!factura) {
@@ -55,7 +55,7 @@ const updateFactura = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             });
         }
         yield factura.update({
-            COD_CLIENTE,
+            CORREO_CLIENTE,
             FECHA_EMISION,
             FECHA_VENCIMIENTO,
             MONTO_TOTAL,

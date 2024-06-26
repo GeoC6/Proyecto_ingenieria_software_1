@@ -33,7 +33,14 @@ export class PerfilComponent implements OnInit {
     const clienteActual = this.clienteService.getClienteActual();
 
     if (clienteActual) {
-      this.clienteInfo = { ...clienteActual };
+      this.clienteInfo = { 
+        correo_cliente: clienteActual.correo_cliente,
+        contrasena: clienteActual.contrasena,
+        celular_cliente: clienteActual.celular_cliente,
+        nombre_cliente: clienteActual.nombre_cliente,
+        apellido_cliente: clienteActual.apellido_cliente,
+        direccion_cliente: clienteActual.direccion_cliente
+      };
       this.loading = false;
     } else {
       this.toastr.error('No se ha encontrado la información del cliente', 'Error');

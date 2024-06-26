@@ -53,7 +53,6 @@ const getClientes = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     try {
         const listaClientes = yield cliente_1.Cliente.findAll({
             attributes: [
-                'COD_CLIENTE',
                 'CORREO_CLIENTE',
                 'CELULAR_CLIENTE',
                 'NOMBRE_CLIENTE',
@@ -70,12 +69,15 @@ const getClientes = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.getClientes = getClientes;
 const loginCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { correo_cliente, contrasena } = req.body;
+    // const { correo_cliente, contrasena } = req.body;
+    const correo_cliente = req.body.correo_cliente;
+    const contrasena = req.body.contrasena;
     if (!correo_cliente || !contrasena) {
         return res.status(400).json({ msg: 'Correo y contraseña son obligatorios' });
     }
     try {
         const cliente = yield cliente_1.Cliente.findOne({ where: { CORREO_CLIENTE: correo_cliente } });
+        console.log(contrasena, correo_cliente);
         if (!cliente) {
             return res.status(401).json({
                 msg: 'El correo ingresado no es válido'
@@ -90,7 +92,7 @@ const loginCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const token = jsonwebtoken_1.default.sign({
             correo_cliente: correo_cliente
         }, process.env.SECRET_KEY || 'PRUEBA1');
-        res.json({ token });
+        res.json({ token, cliente });
     }
     catch (error) {
         res.status(500).json({
@@ -101,25 +103,25 @@ const loginCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.loginCliente = loginCliente;
 const getCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { cod_cliente } = req.params;
+    const { correo_cliente } = req.params;
     try {
-        const idCliente = yield cliente_1.Cliente.findOne({
+        const cliente = yield cliente_1.Cliente.findOne({
             attributes: [
-                'COD_CLIENTE',
                 'CORREO_CLIENTE',
                 'CELULAR_CLIENTE',
                 'NOMBRE_CLIENTE',
                 'APELLIDO_CLIENTE',
-                'DIRECCION_CLIENTE'
+                'DIRECCION_CLIENTE',
+                // 'CODIGO_CLIENTE'
             ],
-            where: { COD_CLIENTE: cod_cliente }
+            where: { CORREO_CLIENTE: correo_cliente }
         });
-        if (!idCliente) {
+        if (!cliente) {
             return res.status(404).json({
-                msg: "El código de cliente indicado no existe"
+                msg: "El correo de cliente indicado no existe"
             });
         }
-        return res.json(idCliente);
+        return res.json(cliente);
     }
     catch (error) {
         return res.status(400).json({
@@ -130,39 +132,38 @@ const getCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.getCliente = getCliente;
 const deleteCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { cod_cliente } = req.params;
+    const { correo_cliente } = req.params;
     try {
-        const idCliente = yield cliente_1.Cliente.findOne({ where: { COD_CLIENTE: cod_cliente } });
-        if (!idCliente) {
+        const cliente = yield cliente_1.Cliente.findOne({ where: { CORREO_CLIENTE: correo_cliente } });
+        if (!cliente) {
             return res.status(404).json({
-                msg: "El código " + cod_cliente + " de cliente no existe"
+                msg: "El correo " + correo_cliente + " de cliente no existe"
             });
         }
-        yield cliente_1.Cliente.destroy({ where: { COD_CLIENTE: cod_cliente } });
+        yield cliente_1.Cliente.destroy({ where: { CORREO_CLIENTE: correo_cliente } });
         res.json({
-            msg: "Se ha eliminado al cliente: " + cod_cliente
+            msg: "Se ha eliminado al cliente: " + correo_cliente
         });
     }
     catch (error) {
         res.status(400).json({
-            msg: "No se ha podido eliminar el cliente con código: " + cod_cliente,
+            msg: "No se ha podido eliminar el cliente con correo: " + correo_cliente,
             error
         });
     }
 });
 exports.deleteCliente = deleteCliente;
 const updateCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { cod_cliente } = req.params;
+    const { correo_cliente } = req.params;
     try {
-        const idCliente = yield cliente_1.Cliente.findOne({ where: { COD_CLIENTE: cod_cliente } });
-        if (!idCliente) {
+        const cliente = yield cliente_1.Cliente.findOne({ where: { CORREO_CLIENTE: correo_cliente } });
+        if (!cliente) {
             return res.status(404).json({
-                msg: "El código " + cod_cliente + " de cliente no existe"
+                msg: "El correo " + correo_cliente + " de cliente no existe"
             });
         }
-        const { correo_cliente, contrasena, celular_cliente, nombre_cliente, apellido_cliente, direccion_cliente } = req.body;
+        const { contrasena, celular_cliente, nombre_cliente, apellido_cliente, direccion_cliente } = req.body;
         let updateData = {
-            CORREO_CLIENTE: correo_cliente,
             CELULAR_CLIENTE: celular_cliente,
             NOMBRE_CLIENTE: nombre_cliente,
             APELLIDO_CLIENTE: apellido_cliente,
@@ -172,14 +173,14 @@ const updateCliente = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             const hashedPassword = yield bcrypt_1.default.hash(contrasena, 10);
             updateData.CONTRASENA = hashedPassword;
         }
-        yield cliente_1.Cliente.update(updateData, { where: { COD_CLIENTE: cod_cliente } });
+        yield cliente_1.Cliente.update(updateData, { where: { CORREO_CLIENTE: correo_cliente } });
         res.json({
-            msg: "Se ha actualizado al cliente: " + cod_cliente
+            msg: "Se ha actualizado al cliente: " + correo_cliente
         });
     }
     catch (error) {
         res.status(400).json({
-            msg: "No se ha podido actualizar el cliente con código: " + cod_cliente,
+            msg: "No se ha podido actualizar el cliente con correo: " + correo_cliente,
             error
         });
     }

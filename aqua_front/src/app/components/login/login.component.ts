@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       contrasena: this.password,
       cod_rol: this.rol,
     }
-    console.log(typeof(this._userService.getRolFromToken()))
+   
 
     this.loading = true;
     this._userService.login(user).subscribe({
