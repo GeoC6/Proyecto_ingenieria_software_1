@@ -46,7 +46,6 @@ export const getClientes = async (req: Request, res: Response) => {
     try {
         const listaClientes = await Cliente.findAll({
             attributes: [
-                'COD_CLIENTE',
                 'CORREO_CLIENTE',
                 'CELULAR_CLIENTE',
                 'NOMBRE_CLIENTE',
@@ -99,28 +98,27 @@ export const loginCliente = async (req: Request, res: Response) => {
 };
 
 export const getCliente = async (req: Request, res: Response) => {
-    const { cod_cliente } = req.params;
+    const { correo_cliente } = req.params;
 
     try {
-        const idCliente = await Cliente.findOne({
+        const cliente = await Cliente.findOne({
             attributes: [
-                'COD_CLIENTE',
                 'CORREO_CLIENTE',
                 'CELULAR_CLIENTE',
                 'NOMBRE_CLIENTE',
                 'APELLIDO_CLIENTE',
                 'DIRECCION_CLIENTE'
             ],
-            where: { COD_CLIENTE: cod_cliente }
+            where: { CORREO_CLIENTE: correo_cliente }
         });
 
-        if (!idCliente) {
+        if (!cliente) {
             return res.status(404).json({
-                msg: "El código de cliente indicado no existe"
+                msg: "El correo de cliente indicado no existe"
             });
         }
 
-        return res.json(idCliente);
+        return res.json(cliente);
     } catch (error) {
         return res.status(400).json({
             msg: "Ha ocurrido un error",
@@ -130,44 +128,43 @@ export const getCliente = async (req: Request, res: Response) => {
 };
 
 export const deleteCliente = async (req: Request, res: Response) => {
-    const { cod_cliente } = req.params;
+    const { correo_cliente } = req.params;
 
     try {
-        const idCliente = await Cliente.findOne({ where: { COD_CLIENTE: cod_cliente } });
+        const cliente = await Cliente.findOne({ where: { CORREO_CLIENTE: correo_cliente } });
 
-        if (!idCliente) {
+        if (!cliente) {
             return res.status(404).json({
-                msg: "El código " + cod_cliente + " de cliente no existe"
+                msg: "El correo " + correo_cliente + " de cliente no existe"
             });
         }
 
-        await Cliente.destroy({ where: { COD_CLIENTE: cod_cliente } });
+        await Cliente.destroy({ where: { CORREO_CLIENTE: correo_cliente } });
         res.json({
-            msg: "Se ha eliminado al cliente: " + cod_cliente
+            msg: "Se ha eliminado al cliente: " + correo_cliente
         });
     } catch (error) {
         res.status(400).json({
-            msg: "No se ha podido eliminar el cliente con código: " + cod_cliente,
+            msg: "No se ha podido eliminar el cliente con correo: " + correo_cliente,
             error
         });
     }
 };
 
 export const updateCliente = async (req: Request, res: Response) => {
-    const { cod_cliente } = req.params;
+    const { correo_cliente } = req.params;
 
     try {
-        const idCliente = await Cliente.findOne({ where: { COD_CLIENTE: cod_cliente } });
+        const cliente = await Cliente.findOne({ where: { CORREO_CLIENTE: correo_cliente } });
 
-        if (!idCliente) {
+        if (!cliente) {
             return res.status(404).json({
-                msg: "El código " + cod_cliente + " de cliente no existe"
+                msg: "El correo " + correo_cliente + " de cliente no existe"
             });
         }
 
-        const { correo_cliente, contrasena, celular_cliente, nombre_cliente, apellido_cliente, direccion_cliente } = req.body;
+        const { contrasena, celular_cliente, nombre_cliente, apellido_cliente, direccion_cliente } = req.body;
         let updateData: any = {
-            CORREO_CLIENTE: correo_cliente,
             CELULAR_CLIENTE: celular_cliente,
             NOMBRE_CLIENTE: nombre_cliente,
             APELLIDO_CLIENTE: apellido_cliente,
@@ -179,14 +176,14 @@ export const updateCliente = async (req: Request, res: Response) => {
             updateData.CONTRASENA = hashedPassword;
         }
 
-        await Cliente.update(updateData, { where: { COD_CLIENTE: cod_cliente } });
-        
+        await Cliente.update(updateData, { where: { CORREO_CLIENTE: correo_cliente } });
+
         res.json({
-            msg: "Se ha actualizado al cliente: " + cod_cliente
+            msg: "Se ha actualizado al cliente: " + correo_cliente
         });
     } catch (error) {
         res.status(400).json({
-            msg: "No se ha podido actualizar el cliente con código: " + cod_cliente,
+            msg: "No se ha podido actualizar el cliente con correo: " + correo_cliente,
             error
         });
     }

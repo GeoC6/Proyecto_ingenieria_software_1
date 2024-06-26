@@ -12,10 +12,10 @@ export const getFacturas = async (req: Request, res: Response) => {
 };
 
 export const newFactura = async (req: Request, res: Response) => {
-    const { COD_CLIENTE, FECHA_EMISION, FECHA_VENCIMIENTO, MONTO_TOTAL, ESTADO } = req.body;
+    const { CORREO_CLIENTE, FECHA_EMISION, FECHA_VENCIMIENTO, MONTO_TOTAL, ESTADO } = req.body;
     try {
         await Facturas.create({
-            COD_CLIENTE,
+            CORREO_CLIENTE,
             FECHA_EMISION,
             FECHA_VENCIMIENTO,
             MONTO_TOTAL,
@@ -34,7 +34,7 @@ export const newFactura = async (req: Request, res: Response) => {
 
 export const updateFactura = async (req: Request, res: Response) => {
     const { COD_FACTURA } = req.params;
-    const { COD_CLIENTE, FECHA_EMISION, FECHA_VENCIMIENTO, MONTO_TOTAL, ESTADO } = req.body;
+    const { CORREO_CLIENTE, FECHA_EMISION, FECHA_VENCIMIENTO, MONTO_TOTAL, ESTADO } = req.body;
     try {
         const factura = await Facturas.findByPk(COD_FACTURA);
         if (!factura) {
@@ -43,7 +43,7 @@ export const updateFactura = async (req: Request, res: Response) => {
             });
         }
         await factura.update({
-            COD_CLIENTE,
+            CORREO_CLIENTE,
             FECHA_EMISION,
             FECHA_VENCIMIENTO,
             MONTO_TOTAL,
@@ -73,7 +73,8 @@ export const deleteFactura = async (req: Request, res: Response) => {
         return res.json({
             msg: 'Factura eliminada correctamente',
         });
-    } catch (error) {
+    }
+    catch (error) {
         res.status(400).json({
             msg: 'Ocurrió un error al eliminar la factura',
             error,

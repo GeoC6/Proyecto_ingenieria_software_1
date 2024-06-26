@@ -7,7 +7,7 @@ export const Facturas = sequelize.define(
     'Facturas',
     {
         COD_FACTURA: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        COD_CLIENTE: { type: DataTypes.INTEGER },
+        CORREO_CLIENTE: { type: DataTypes.INTEGER },
         FECHA_EMISION: { type: DataTypes.INTEGER },
         FECHA_VENCIMIENTO: { type: DataTypes.INTEGER },
         MONTO_TOTAL: { type: DataTypes.INTEGER },
@@ -19,4 +19,4 @@ export const Facturas = sequelize.define(
     }
 );
 
-Facturas.belongsTo(Cliente, { foreignKey: 'COD_CLIENTE' });
+Facturas.belongsTo(Cliente, { foreignKey: 'CORREO_CLIENTE' });

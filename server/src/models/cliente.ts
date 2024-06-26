@@ -5,8 +5,7 @@ import { Rol } from './rol';
 export const Cliente = sequelize.define(
     'Cliente',
     {
-        COD_CLIENTE: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        CORREO_CLIENTE: { type: DataTypes.STRING(255), allowNull: false, unique: true },
+        CORREO_CLIENTE: { type: DataTypes.STRING(255), primaryKey: true, allowNull: false },
         CONTRASENA: { type: DataTypes.STRING(255), allowNull: false },
         CELULAR_CLIENTE: { type: DataTypes.STRING(15), allowNull: false },
         NOMBRE_CLIENTE: { type: DataTypes.STRING(255), allowNull: false },
@@ -18,4 +17,3 @@ export const Cliente = sequelize.define(
         timestamps: false,
     }
 );
-
