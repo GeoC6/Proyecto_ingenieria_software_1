@@ -14,7 +14,9 @@ export class PerfilComponent implements OnInit {
     celular_cliente: '',
     nombre_cliente: '',
     apellido_cliente: '',
-    direccion_cliente: ''
+    direccion_cliente: '',
+    cod_cliente: 0,
+
   };
   loading: boolean = false;
   editable: boolean = false;
@@ -39,7 +41,8 @@ export class PerfilComponent implements OnInit {
         celular_cliente: clienteActual.celular_cliente,
         nombre_cliente: clienteActual.nombre_cliente,
         apellido_cliente: clienteActual.apellido_cliente,
-        direccion_cliente: clienteActual.direccion_cliente
+        direccion_cliente: clienteActual.direccion_cliente,
+        cod_cliente: clienteActual.cod_cliente
       };
       this.loading = false;
     } else {
@@ -52,35 +55,26 @@ export class PerfilComponent implements OnInit {
     this.editable = !this.editable;
   }
 
-  onSubmit(event: Event) {
-    event.preventDefault();
+  onSubmit() {
+    if (!this.clienteInfo) {
+      this.toastr.error('No hay información del cliente para actualizar', 'Error');
+      return;
+    }
+  
     this.loading = true;
-
-    const clienteActual = this.clienteService.getClienteActual();
-
-    if (clienteActual && clienteActual.correo_cliente) {
-      this.clienteService.updateCliente(clienteActual.correo_cliente, this.clienteInfo).subscribe(
-        response => {
-          this.toastr.success('Información actualizada exitosamente', 'Éxito');
-          this.loading = false;
-          this.editable = false;
-        },
-        error => {
-          this.toastr.error('Error al actualizar la información del cliente', 'Error');
-          this.loading = false;
-          console.error('Error al actualizar la información del cliente:', error);
-        }
-      );
-    } else {
-      this.toastr.error('No se ha encontrado la información del cliente para actualizar', 'Error');
-      this.loading = false;
-    }
-  }
-
-  updateFieldValue(event: Event, field: keyof Cliente) {
-    const target = event.target as HTMLInputElement;
-    if (target) {
-      this.clienteInfo[field] = target.value;
-    }
+    const clienteId = this.clienteInfo.cod_cliente; // Utiliza cod_cliente en lugar de correo_cliente
+  
+    this.clienteService.updateCliente(clienteId, this.clienteInfo).subscribe(
+      response => {
+        console.log(clienteId);
+        this.toastr.success('Información actualizada exitosamente', 'Éxito');
+        this.editable = false;
+      },
+      error => {
+        this.toastr.error('Error al actualizar la información del cliente', 'Error');
+        console.error('Error al actualizar la información del cliente:', error);
+      },
+      () => this.loading = false
+    );
   }
 }

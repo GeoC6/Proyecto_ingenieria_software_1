@@ -20,6 +20,7 @@ export class RegistroClienteComponent implements OnInit {
   password: string = '';
   confirmPassword: string = '';
   loading: boolean = false;
+  cod_cliente = 0;
 
   constructor(
     private toastr: ToastrService,
@@ -50,7 +51,8 @@ export class RegistroClienteComponent implements OnInit {
       celular_cliente: this.celular,
       nombre_cliente: this.nombre,
       apellido_cliente: this.apellido,
-      direccion_cliente: this.direccion
+      direccion_cliente: this.direccion,
+      cod_cliente: this.cod_cliente
     };
 
     this.loading = true;

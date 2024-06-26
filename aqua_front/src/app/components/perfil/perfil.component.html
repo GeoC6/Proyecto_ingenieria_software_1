@@ -1,7 +1,7 @@
 <div class="container">
   <h2 class="mb-4">Perfil del Cliente</h2>
 
-  <form (submit)="onSubmit($event)">
+  <form (submit)="onSubmit()">
     <div class="mb-3">
       <label for="nombre_cliente" class="form-label">Nombre</label>
       <input type="text" class="form-control" id="nombre_cliente" [value]="clienteInfo.nombre_cliente" (input)="clienteInfo.nombre_cliente = $any($event.target).value" required>
