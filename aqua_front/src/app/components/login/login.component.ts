@@ -40,15 +40,17 @@ export class LoginComponent implements OnInit {
       contrasena: this.password,
       cod_rol: this.rol,
     }
+    console.log(typeof(this._userService.getRolFromToken()))
 
     this.loading = true;
     this._userService.login(user).subscribe({
       next: () => {
         // Obtén el rol del token
         const userRol = this._userService.getRolFromToken();
+        
   
         // Verifica el rol y redirige al componente correspondiente
-        if (userRol === 1) {
+        if (userRol === "1") {
           this.router.navigate(['/admin']);
         } else {
           this.router.navigate(['/empleado']);

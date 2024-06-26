@@ -47,9 +47,9 @@ export class UserService {
   createRole(rol: number): Observable<any> {
     return this.http.post(`${this.myAppUrl}/api/roles`, rol);
   }
-  getRolFromToken(): number | null {
+  getRolFromToken(): string {
     const rol = localStorage.getItem('rol');
-    return rol ? +rol : null;
+    return rol ? rol: "";
   }
   
 
