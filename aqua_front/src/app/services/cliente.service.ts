@@ -60,7 +60,12 @@ export class ClienteService {
   }
 
   getClienteActual(): Cliente | null {
-    console.log()
+    if (!this.clienteActual) {
+      const clienteActual = localStorage.getItem('clienteActual');
+      if (clienteActual) {
+        this.clienteActual = JSON.parse(clienteActual);
+      }
+    }
     return this.clienteActual;
   }
   
@@ -79,7 +84,7 @@ export class ClienteService {
       })
     );
   }
-  
+
   setClienteActual(cliente: any) {
     const nuevoCliente: Cliente = {
       correo_cliente: cliente.CORREO_CLIENTE,

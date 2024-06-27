@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService, Cliente } from 'src/app/services/cliente.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -21,10 +22,20 @@ export class PerfilComponent implements OnInit {
   loading: boolean = false;
   editable: boolean = false;
 
+
+  
   constructor(
     private clienteService: ClienteService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
+  irAInicio() {
+    this.router.navigate(['/inicio']);
+  }
+  logOut() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/inicio'])
+}
 
   ngOnInit(): void {
     this.getCliente();
@@ -55,26 +66,26 @@ export class PerfilComponent implements OnInit {
     this.editable = !this.editable;
   }
 
-  onSubmit() {
-    if (!this.clienteInfo) {
-      this.toastr.error('No hay información del cliente para actualizar', 'Error');
-      return;
-    }
-  
+  onSubmit(event: Event) {
+    event.preventDefault();
     this.loading = true;
-    const clienteId = this.clienteInfo.cod_cliente; // Utiliza cod_cliente en lugar de correo_cliente
-  
-    this.clienteService.updateCliente(clienteId, this.clienteInfo).subscribe(
-      response => {
-        console.log(clienteId);
-        this.toastr.success('Información actualizada exitosamente', 'Éxito');
-        this.editable = false;
-      },
-      error => {
-        this.toastr.error('Error al actualizar la información del cliente', 'Error');
-        console.error('Error al actualizar la información del cliente:', error);
-      },
-      () => this.loading = false
-    );
+    const clienteActual = this.clienteService.getClienteActual();
+    if (clienteActual && clienteActual.correo_cliente) {
+      this.clienteService.updateCliente(clienteActual.cod_cliente, this.clienteInfo).subscribe(
+        response => {
+          this.toastr.success('Información actualizada exitosamente', 'Éxito');
+          this.loading = false;
+          this.editable = false;
+        },
+        error => {
+          this.toastr.error('Error al actualizar la información del cliente', 'Error');
+          this.loading = false;
+          console.error('Error al actualizar la información del cliente:', error);
+        }
+      );
+    } else {
+      this.toastr.error('No se ha encontrado la información del cliente para actualizar', 'Error');
+      this.loading = false;
+    }
   }
 }
