@@ -68,6 +68,10 @@ export class PerfilComponent implements OnInit {
 
   onSubmit(event: Event) {
     event.preventDefault();
+    if (!this.clienteInfo.contrasena) {
+      this.toastr.error('La contraseña es requerida para actualizar la información', 'Error');
+      return;
+    }
     this.loading = true;
     const clienteActual = this.clienteService.getClienteActual();
     if (clienteActual && clienteActual.correo_cliente) {

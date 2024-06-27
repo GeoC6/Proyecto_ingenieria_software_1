@@ -31,44 +31,28 @@ export class LoginClienteComponent {
 
     this.loading = true;
 
-    const credentials : Credentials = {
+    const credentials: Credentials = {
       correo_cliente: this.correo,
       contrasena: this.contrasena,
       cod_cliente: this.cod_cliente
     };
-    
 
-    this.loading = true;
-    // console.log("Estamos en logincliente.component")
     this.clienteService.loginCliente(credentials).subscribe({
-      next: () => {
-        const cod_cliente = this.clienteService.getCodFromToken();
-
-        if (cod_cliente != null){
-          this.toastr.success('Login exitoso', 'Bienvenido');
-          this.router.navigate(['/perfil'])
-        } else {
-          this.toastr.error('Error en el servicio de login2', 'Error');
-        }
-      }
-    });
-   
-
-    this.clienteService.loginCliente(credentials).subscribe(
-      response => {
+      next: response => {
         this.loading = false;
         if (response && response.token) {
           this.toastr.success('Login exitoso', 'Bienvenido');
+          this.router.navigate(['/perfil']);
         } else {
-          this.toastr.error('Error en el servicio de login', 'Error');
+          this.toastr.error('Correo o contraseña incorrectos', 'Error');
         }
       },
-      error => {
+      error: error => {
         this.loading = false;
-        this.toastr.error('Error en el servicio de login', 'Error');
+        this.toastr.error('Correo o contraseña incorrectos', 'Error');
         console.error('Error en el servicio de login:', error);
       }
-    );
+    });
   }
 
   checkCapsLock(event: KeyboardEvent) {

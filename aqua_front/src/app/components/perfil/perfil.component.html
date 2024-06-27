@@ -34,10 +34,10 @@
         </div>
 
         <div class="mb-3">
-          <label for="contrasena" class="form-label">Contraseña (dejar en blanco para mantener la actual)</label>
-          <input type="password" class="form-control" id="contrasena" [value]="clienteInfo.contrasena" (input)="clienteInfo.contrasena = $any($event.target).value" [readonly]="!editable">
+          <label for="contrasena" class="form-label">Contraseña (obligatorio si se actualiza la informacion)</label>
+          <input type="password" class="form-control" id="contrasena" [value]="editable ? '' : clienteInfo.contrasena" (input)="clienteInfo.contrasena = $any($event.target).value" [readonly]="!editable" [required]="editable">
         </div>
-
+        
         <button type="button" class="btn btn-secondary" (click)="toggleEdit()">{{ editable ? 'Cancelar' : 'Editar' }}</button>
         <button type="submit" class="btn btn-success" [disabled]="!editable">Actualizar Información</button>
       </form>
