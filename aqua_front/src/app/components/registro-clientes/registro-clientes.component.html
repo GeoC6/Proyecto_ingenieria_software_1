@@ -1,6 +1,12 @@
-<div class="wrapper">
+<!-- back-button.component.html -->
+<button class="back-button" (click)="goBack()">
+  <i class="fas fa-arrow-left"></i> Volver Atrás
+</button>
+
+
+<div class="wrapper" style="background-image: url('../../../assets/img/fondo.login.cliente.png'); background-size: cover;">
     <div *ngIf="!loading" class="body">
-      <img class="logo" src="../../../assets/img/login.png" alt="img login">
+      <img class="logo" src="../../../assets/img/logoAqua.png" alt="img login">
       <h3>Registrar Usuario</h3>
       <div class="form-floating mb-3 mt-3">
         <input type="email" [(ngModel)]="correo" class="form-control" placeholder="Ingrese correo electrónico">

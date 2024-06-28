@@ -1,0 +1,61 @@
+button:hover {
+    background-color: #fff;
+    animation: scaleOut 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation-fill-mode: forwards;
+  }
+  
+  button:hover i {
+    animation: rotate 2s linear 3;
+    animation-iteration-count: 3;
+  }
+  
+  @keyframes scaleOut {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+  h3 {
+    color: turquoise;
+    text-decoration: dashed;
+    font-size: 2em;
+  }
+  .body {
+    background-color: grey;
+    width: 100rem;
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 10 40px 80px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+    padding: 2rem; /* Espaciado interno */
+    max-width: 400px; /* Ancho máximo del contenedor */
+    margin: 2rem auto; /* Centrando el contenedor */
+  }
+  /* back-button.component.css */
+.back-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: green;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 1000; /* Asegura que el botón esté por encima de otros elementos */
+  }
+  
+  .back-button i {
+    margin-right: 8px;
+  }
+  
+  .back-button:hover {
+    background-color: #00b336;
+  }
+  
+  

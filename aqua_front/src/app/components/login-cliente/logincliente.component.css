@@ -1,0 +1,66 @@
+a {
+    color: #fff;
+    text-decoration: none;
+    background-color: transparent;
+  }
+  
+  a:hover {
+    color: turquoise;
+    text-decoration: none;
+    background-color: transparent;
+  }
+  
+  button:hover {
+    background-color: #fff;
+    animation: scaleOut 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation-fill-mode: forwards;
+  }
+  
+  button:hover i {
+    animation: rotate 2s linear 3;
+    animation-iteration-count: 3;
+  }
+  
+  @keyframes scaleOut {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  h3 {
+    color: turquoise;
+    text-decoration: dashed;
+    font-size: 3em;
+  }
+  
+  .inicio {
+    position: fixed;
+    background-color: green;
+    font-size: 1.5em;
+  }
+  .inicio:hover {
+    background-color: #00b336;
+  }
+  
+  .body {
+    background-color: grey;
+    width: 100rem;
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 10 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+    padding: 2rem; /* Espaciado interno */
+    max-width: 400px; /* Ancho máximo del contenedor */
+    margin: 2rem auto; /* Centrando el contenedor */
+  }
+  

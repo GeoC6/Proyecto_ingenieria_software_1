@@ -22,6 +22,12 @@ export class LoginClienteComponent {
     private clienteService: ClienteService,
     private router: Router
   ) {}
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
+  irAInicio() {
+    this.router.navigate(['/inicio']);
+  }
 
   login() {
     if (!this.correo || !this.contrasena) {

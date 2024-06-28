@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { catchError, of } from 'rxjs';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { ErrorService } from 'src/app/services/error.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-registro-clientes',
@@ -26,10 +27,15 @@ export class RegistroClienteComponent implements OnInit {
     private toastr: ToastrService,
     private _clienteService: ClienteService,
     private router: Router,
-    private _errorService: ErrorService
+    private _errorService: ErrorService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {}
+
+  goBack(): void {
+    this.location.back();
+  }
 
   addUser() {
     // Validate the form inputs
@@ -72,7 +78,7 @@ export class RegistroClienteComponent implements OnInit {
       this.loading = false;
       if (response) {
         this.toastr.success(`El usuario ${this.correo} fue registrado con éxito`, 'Usuario registrado');
-        this.router.navigate(['/perfil']);
+        this.router.navigate(['/loginCliente']);
       }
     });
   }

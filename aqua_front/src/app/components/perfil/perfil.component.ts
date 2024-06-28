@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ClienteService, Cliente } from 'src/app/services/cliente.service';
+import { ClienteService, Cliente, Boleta } from 'src/app/services/cliente.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -19,6 +19,7 @@ export class PerfilComponent implements OnInit {
     cod_cliente: 0,
 
   };
+  boletas: Boleta[] = [];
   loading: boolean = false;
   editable: boolean = false;
 
@@ -90,6 +91,15 @@ export class PerfilComponent implements OnInit {
     } else {
       this.toastr.error('No se ha encontrado la información del cliente para actualizar', 'Error');
       this.loading = false;
+    }
+  }
+  getBoletas() {
+    const cod_cliente = this.clienteService.getCodFromToken();
+    if (cod_cliente) {
+      this.clienteService.getBoletasByCliente(cod_cliente).subscribe(
+        boletas => this.boletas = boletas,
+        error => this.toastr.error('Error al obtener las boletas del cliente', 'Error')
+      );
     }
   }
 }

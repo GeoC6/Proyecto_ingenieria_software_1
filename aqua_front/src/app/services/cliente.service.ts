@@ -15,28 +15,45 @@ export interface Cliente {
   apellido_cliente: string;
   direccion_cliente: string;
 }
+export interface Boleta {
+  COD_BOLETA: number;
+  COD_CLIENTE: number;
+  COD_PAGO: number;
+  TRANSACTION_DATE: string;
+  AMOUNT: number;
+  STATUS: string;
+  pagos: {
+    BUY_ORDER: string;
+    AMOUNT: number;
+  };
+  Cliente: {
+    NOMBRE: string;
+    APELLIDO: string;
+  };
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
 
-  private apiUrl = 'http://localhost:3000/api/cliente';
+  private apiUrl = 'http://localhost:3000/api';
   private clienteActual: Cliente | null = null;
   cod_cliente: string | null | undefined;
 
   constructor(private http: HttpClient) { }
 
   createCliente(cliente: Cliente): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}`, cliente);
+    return this.http.post<any>(`${this.apiUrl}/cliente`, cliente);
   }
 
   deleteCliente(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/cliente/${id}`);
   }
 
   loginCliente(credentials: Credentials): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
+    return this.http.post<any>(`${this.apiUrl}/cliente/login`, credentials).pipe(
       tap(response => {
         if (response.token && response.cliente) {
 
@@ -71,7 +88,7 @@ export class ClienteService {
   
   updateCliente(cod_cliente: string | number, cliente: Partial<Cliente>): Observable<any> {
     console.log(cod_cliente)
-    return this.http.put<any>(`${this.apiUrl}/${cod_cliente}`, cliente).pipe(
+    return this.http.put<any>(`${this.apiUrl}/cliente/${cod_cliente}`, cliente).pipe(
       tap(response => {
         // Actualiza clienteActual solo si la respuesta del servidor contiene datos del cliente actualizado
         if (response && response.cliente) {
@@ -96,5 +113,14 @@ export class ClienteService {
       cod_cliente: cliente.COD_CLIENTE
     };
     this.clienteActual = nuevoCliente;
+  }
+
+  getBoletasByCliente(cod_cliente: number): Observable<Boleta[]> {
+    return this.http.get<Boleta[]>(`${this.apiUrl}/boletas/cliente/${cod_cliente}`).pipe(
+      catchError(error => {
+        console.error('Error al obtener las boletas del cliente:', error);
+        return of([]);
+      })
+    );
   }
 }

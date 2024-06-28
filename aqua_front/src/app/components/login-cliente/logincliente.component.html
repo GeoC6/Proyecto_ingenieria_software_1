@@ -1,20 +1,27 @@
-<div class="wrapper">
-    <div *ngIf="!loading" class="body">
-        <img class="logo" src="../../../assets/img/login.png" alt="img login">
-        <h3 class="mb-2">Login</h3>
-        <div class="form-floating mb-3 mt-3">
-            <input type="email" [(ngModel)]="correo" autocomplete="off" class="form-control" placeholder="Ingrese correo">
-            <label>Correo</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="contrasena" autocomplete="off" class="form-control" placeholder="Ingrese contraseña" (keyup)="checkCapsLock($event)" (keydown.enter)="login()">
-            <label>Contraseña</label>
-            <div *ngIf="capsLockOn" class="text-danger">¡Bloqueo de mayúsculas está activado!</div>
-        </div>
-        <div class="d-grid gap-2">
-            <button type="button" class="btn btn-primary btn-lg" (click)="login()">Aceptar</button>
-        </div>
+<button class="inicio btn btn-success position-absolute top-0 start-0 m-3" (click)="irAInicio()">Inicio</button>
+
+<div class="wrapper" style="background-image: url('../../../assets/img/fondo.login.cliente.png'); background-size: cover;">
+  <div *ngIf="!loading" class="body rounded shadow p-4">
+    <img class="logo mb-3" src="../../../assets/img/logoAqua.png" alt="img login">
+    <h3 class="mb-4 text-center">Aqua Pura</h3>
+    <div class="form-floating mb-3 mt-4">
+      <input type="email" [(ngModel)]="correo" autocomplete="off" class="form-control" placeholder="Ingrese correo">
+      <label>Correo</label>
     </div>
-    <app-spinner *ngIf="loading"></app-spinner>
+    <div class="form-floating mb-3">
+      <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="contrasena" autocomplete="off" class="form-control" placeholder="Ingrese contraseña" (keyup)="checkCapsLock($event)" (keydown.enter)="login()">
+      <label>Contraseña</label>
+      <div *ngIf="capsLockOn" class="text-danger">¡Bloqueo de mayúsculas está activado!</div>
+    </div>
+    <div class="d-grid gap-2">
+      <button type="button" class="btn btn-primary btn-lg" (click)="login()">Aceptar</button>
+    </div>
+    <div class="d-grid mt-3">
+      <a href="/registro"> ¿No tienes cuenta?, ¡Registrate Aquí!</a>
+    </div>
+    <button class="btn btn-secondary position-absolute top-0 end-0 m-3" (click)="navigateToLogin()">
+      <i class="fas fa-cog"></i> <!-- Icono de engranaje -->
+    </button>
   </div>
-  
+  <app-spinner *ngIf="loading"></app-spinner>
+</div>
