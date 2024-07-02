@@ -7,7 +7,7 @@ import { Credentials } from '../interfaces/cliente';
 
 
 export interface Cliente {
-  cod_cliente: any;
+  cod_cliente: number;
   correo_cliente: string;
   contrasena: string;
   celular_cliente: string;
@@ -15,6 +15,7 @@ export interface Cliente {
   apellido_cliente: string;
   direccion_cliente: string;
 }
+
 export interface Boleta {
   COD_BOLETA: number;
   COD_CLIENTE: number;
@@ -40,7 +41,7 @@ export class ClienteService {
 
   private apiUrl = 'http://localhost:3000/api';
   private clienteActual: Cliente | null = null;
-  cod_cliente: string | null | undefined;
+  cod_cliente: number | null = null ;
 
   constructor(private http: HttpClient) { }
 
@@ -60,7 +61,7 @@ export class ClienteService {
 
           localStorage.setItem('token', response.token);
           // console.log(response.cod_cliente)
-          localStorage.setItem('cod_cliente', response.cliente.cod_cliente);
+          localStorage.setItem('cod_cliente', response.cliente.COD_CLIENTE);
 
           this.setClienteActual(response.cliente);
         }
@@ -73,12 +74,13 @@ export class ClienteService {
   }
   getCodFromToken(): number | null {
     const cod_cliente = localStorage.getItem('cod_cliente');
-    return cod_cliente? +cod_cliente: null;
+    return cod_cliente ? JSON.parse(cod_cliente) : null;
   }
 
   getClienteActual(): Cliente | null {
     if (!this.clienteActual) {
       const clienteActual = localStorage.getItem('clienteActual');
+      
       if (clienteActual) {
         this.clienteActual = JSON.parse(clienteActual);
       }
@@ -87,7 +89,6 @@ export class ClienteService {
   }
   
   updateCliente(cod_cliente: string | number, cliente: Partial<Cliente>): Observable<any> {
-    console.log(cod_cliente)
     return this.http.put<any>(`${this.apiUrl}/cliente/${cod_cliente}`, cliente).pipe(
       tap(response => {
         // Actualiza clienteActual solo si la respuesta del servidor contiene datos del cliente actualizado

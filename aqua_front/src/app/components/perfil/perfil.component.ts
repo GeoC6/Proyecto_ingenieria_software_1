@@ -33,6 +33,9 @@ export class PerfilComponent implements OnInit {
   irAInicio() {
     this.router.navigate(['/inicio']);
   }
+  irAProductos() {
+    this.router.navigate(['/web']);
+  }
   logOut() {
     localStorage.removeItem('token');
     this.router.navigate(['/inicio'])
@@ -41,6 +44,7 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
     this.getCliente();
   }
+
 
   getCliente() {
     this.loading = true;
@@ -60,6 +64,7 @@ export class PerfilComponent implements OnInit {
     } else {
       this.toastr.error('No se ha encontrado la información del cliente', 'Error');
       this.loading = false;
+      
     }
   }
 
@@ -91,15 +96,6 @@ export class PerfilComponent implements OnInit {
     } else {
       this.toastr.error('No se ha encontrado la información del cliente para actualizar', 'Error');
       this.loading = false;
-    }
-  }
-  getBoletas() {
-    const cod_cliente = this.clienteService.getCodFromToken();
-    if (cod_cliente) {
-      this.clienteService.getBoletasByCliente(cod_cliente).subscribe(
-        boletas => this.boletas = boletas,
-        error => this.toastr.error('Error al obtener las boletas del cliente', 'Error')
-      );
     }
   }
 }

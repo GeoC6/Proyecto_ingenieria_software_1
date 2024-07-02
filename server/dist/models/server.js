@@ -25,6 +25,7 @@ const cliente_1 = __importDefault(require("../routes/cliente"));
 const carrito_1 = __importDefault(require("../routes/carrito"));
 const pagos_1 = __importDefault(require("../routes/pagos"));
 const boleta_1 = __importDefault(require("../routes/boleta"));
+const carro_1 = __importDefault(require("../routes/carro"));
 const webpayRoutes_1 = __importDefault(require("../routes/webpayRoutes"));
 const user_2 = require("./user");
 const producto_2 = require("./producto");
@@ -37,6 +38,7 @@ const carrito_2 = require("./carrito");
 const user_3 = require("../controllers/user");
 const pagos_2 = require("./pagos");
 const boleta_2 = require("./boleta");
+const transbank_1 = require("./transbank");
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -64,6 +66,7 @@ class Server {
         this.app.use('/api/boletas', boleta_1.default);
         this.app.use('/api/cliente', cliente_1.default);
         this.app.use('/api/carrito', carrito_1.default);
+        this.app.use('/api/carro', carro_1.default);
         this.app.use('/webpay', webpayRoutes_1.default);
     }
     midlewares() {
@@ -83,6 +86,7 @@ class Server {
                 yield boleta_2.boleta.sync();
                 yield cliente_2.Cliente.sync();
                 yield carrito_2.Carrito.sync();
+                yield transbank_1.transbank.sync();
             }
             catch (error) {
                 console.error('No se ha podido conectar a la base de datos', error);

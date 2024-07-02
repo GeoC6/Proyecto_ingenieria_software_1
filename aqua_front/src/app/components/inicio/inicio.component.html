@@ -1,79 +1,120 @@
 <body>
   <!-- conexión con font awesome para utilizar iconos-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
   <!--barra de navegación-->
   <nav class="navbar navbar-expand-lg bg-light navbar-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img class="btn inicio" src = "../../../assets/img/logoAqua.png" alt = "Aqua Logo" width="70" >
-        </a>
-        <div class="navbar-nav mx-auto">
-          <a class="nav-b" routerLink="/reserva">HAZ TU PEDIDO</a>
-        </div>
-        <div class="navbar-nav mr-auto">
-          
-          <button class="btn btn-outline-dark btn-outline-success-on-hover" (click)="logOut()" type="button">Iniciar Sesión</button>
-        </div>
-      </div>    
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img
+          class="btn inicio"
+          src="../../../assets/img/logoAqua.png"
+          alt="Aqua Logo"
+          width="70"
+        />
+      </a>
+      <div class="navbar-nav mx-auto">
+        <a class="nav-b" routerLink="/web">PRODUCTOS</a>
+      </div>
+      <div class="navbar-nav mr-auto">
+        <button
+          class="btn btn-outline-dark btn-outline-success-on-hover"
+          (click)="logOut()"
+          type="button"
+        >
+          Comprar
+        </button>
+      </div>
+    </div>
   </nav>
 
   <!--Encabezado (nombre de empresa + descripción)-->
   <header class="content header">
     <h2 class="tittle">Aqua Pura</h2>
-    <p class="p"><strong>
-      Transformamos agua en pureza. Tu fuente confiable de frescura excepcional. Somos más que distribuidores, somos la esencia misma de la calidad.
-    </strong>
+    <p class="p">
+      <strong>
+        Transformamos agua en pureza. Tu fuente confiable de frescura
+        excepcional. Somos más que distribuidores, somos la esencia misma de la
+        calidad.
+      </strong>
     </p>
   </header>
 
   <!--sección de productos-->
   <section class="content prod">
     <h2 class="tittleP">Productos</h2>
-    <p class="p"><strong>
-      Explora la frescura pura. Descubre nuestros productos excepcionales, diseñados para elevar tu experiencia con el agua. Disfruta de la calidad en cada gota, porque la pureza es nuestro compromiso.
-    </strong>
-  </p>
-    
+    <p class="p">
+      <strong>
+        Explora la frescura pura. Descubre nuestros productos excepcionales,
+        diseñados para elevar tu experiencia con el agua. Disfruta de la calidad
+        en cada gota, porque la pureza es nuestro compromiso.
+      </strong>
+    </p>
+
     <!--box principal para mostrar productos-->
     <div class="box-container">
-
       <!--tipo de box para imagenes de productos cuadradas(desde producto 1 a 3)-->
       <div class="box1">
         <h3></h3>
-        <img src="../../../assets/img/p1.png" alt="producto 1" width="380">
+        <img src="../../../assets/img/p1.png" alt="producto 1" width="380" />
         <p></p>
       </div>
       <div class="box1">
         <h3></h3>
-        <img src="../../../assets/img/p2.png" alt="producto 2" width="380">
+        <img src="../../../assets/img/p2.png" alt="producto 2" width="380" />
         <p></p>
       </div>
       <div class="box1">
         <h3></h3>
-        <img src="../../../assets/img/p6.png" alt="producto 6" width="380">
+        <img src="../../../assets/img/p6.png" alt="producto 6" width="380" />
         <p></p>
       </div>
-      
+
       <!--tipo de box para imagenes de productos rectangulares(desde producto 4 a 7)-->
       <div class="box2">
         <h3></h3>
-        <img src="../../../assets/img/p3.png" alt="producto 3" width="560" height="270">
+        <img
+          src="../../../assets/img/p3.png"
+          alt="producto 3"
+          width="560"
+          height="270"
+        />
         <p></p>
       </div>
       <div class="box2">
         <h3></h3>
-        <img src="../../../assets/img/p4.png" alt="producto 4" width="560" height="270">
+        <img
+          src="../../../assets/img/p4.png"
+          alt="producto 4"
+          width="560"
+          height="270"
+        />
         <p></p>
       </div>
       <div class="box2">
         <h3></h3>
-        <img src="../../../assets/img/p5.png" alt="producto 5" width="560" height="270">
+        <img
+          src="../../../assets/img/p5.png"
+          alt="producto 5"
+          width="560"
+          height="270"
+        />
         <p></p>
       </div>
       <div class="box2">
         <h3></h3>
-        <img src="../../../assets/img/p7.png" alt="producto 7" width="640" height="270">
+        <img
+          src="../../../assets/img/p7.png"
+          alt="producto 7"
+          width="640"
+          height="270"
+        />
         <p></p>
       </div>
     </div>
@@ -82,9 +123,14 @@
   <!--sección apartado nosotros-->
   <section class="content About">
     <h2 class="tittleN">Nosotros</h2>
-    <p class="p"><strong>
-      Nuestra fuente es la red pública, ya tratada elementalmente. Sin embargo, vamos más allá. A través de procesos meticulosos como filtrado, osmosis inversa y desinfección, elevamos la calidad del agua a estándares excepcionales. Nos esforzamos para brindarte, a ti y a tu familia, una experiencia de agua más rica, saludable y pura.
-    </strong> 
+    <p class="p">
+      <strong>
+        Nuestra fuente es la red pública, ya tratada elementalmente. Sin
+        embargo, vamos más allá. A través de procesos meticulosos como filtrado,
+        osmosis inversa y desinfección, elevamos la calidad del agua a
+        estándares excepcionales. Nos esforzamos para brindarte, a ti y a tu
+        familia, una experiencia de agua más rica, saludable y pura.
+      </strong>
     </p>
   </section>
 
@@ -95,20 +141,22 @@
       <div class="columnH">
         <h2 class="tittleH">Horarios</h2>
         <p class="parrafoC">
-          <strong><i class="fa-regular fa-clock"></i> Horario de atención:</strong>
-          <br>
+          <strong
+            ><i class="fa-regular fa-clock"></i> Horario de atención:</strong
+          >
+          <br />
           Lunes: 9:00 am.  –  7:00 pm.
-          <br>
+          <br />
           Martes: 9:00 am. –  7:00 pm.
-          <br>
+          <br />
           Miércoles: 9:00 am.  –  7:00 pm.
-          <br>
+          <br />
           Jueves: 9:00 am.  –  7:00 pm.
-          <br>
+          <br />
           Viernes: 9:00 am.  –  7:00 pm.
-          <br>
+          <br />
           Sábado: 9:00 am.  –  6:00 pm.
-          <br>
+          <br />
           Domingo: Cerrado
         </p>
       </div>
@@ -116,18 +164,33 @@
       <!-- Columna de Localización -->
       <div class="columnL">
         <h2 class="tittleL">Localización</h2>
-        <p class="parrafoC"><i class="fa-solid fa-location-dot"></i> Chañar Villa Baquedano 520 2820000 Rancagua O'Higgins Chile</p>
+        <p class="parrafoC">
+          <i class="fa-solid fa-location-dot"></i> Chañar Villa Baquedano 520
+          2820000 Rancagua O'Higgins Chile
+        </p>
         <figure class="cont">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3301.1886940163563!2d-70.7668553121003!3d-34.16709300379035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9663431dcef87f2f%3A0xa61c79d0f6b887d!2sAvenida%20General%20Baquedano%20520%2C%202840302%20Cachapoal%2C%20Rancagua%2C%20O&#39;Higgins!5e0!3m2!1ses-419!2scl!4v1699632471454!5m2!1ses-419!2scl" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3301.1886940163563!2d-70.7668553121003!3d-34.16709300379035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9663431dcef87f2f%3A0xa61c79d0f6b887d!2sAvenida%20General%20Baquedano%20520%2C%202840302%20Cachapoal%2C%20Rancagua%2C%20O&#39;Higgins!5e0!3m2!1ses-419!2scl!4v1699632471454!5m2!1ses-419!2scl"
+            width="400"
+            height="300"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
         </figure>
       </div>
 
       <!-- Columna de Contacto -->
       <div class="columnC">
         <h2 class="tittleC">Contacto</h2>
-        <p class="parrafoC"><i class="fa-brands fa-whatsapp"></i> +56936860576</p>
-        <p class="parrafoC"><i class="fa-regular fa-envelope"></i> aquapura.eirl@gmail.com</p>
+        <p class="parrafoC">
+          <i class="fa-brands fa-whatsapp"></i> +56936860576
+        </p>
+        <p class="parrafoC">
+          <i class="fa-regular fa-envelope"></i> aquapura.eirl@gmail.com
+        </p>
       </div>
     </div>
   </section>
-  
+</body>
