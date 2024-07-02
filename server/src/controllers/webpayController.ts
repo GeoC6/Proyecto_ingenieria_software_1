@@ -90,3 +90,22 @@ export const responseTransaction = async (
   }
   return
 }
+
+export const getTransactions = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const transactions = await transbank.findAll({
+      attributes: [
+        'COD_CLIENTE',
+        'TRANSACTION_DATE',
+        'AMOUNT',
+        'STATUS',
+        'CODE'
+      ]
+    });
+
+    res.status(200).json(transactions);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener las transacciones.' });
+  }
+};
