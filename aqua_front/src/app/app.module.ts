@@ -57,6 +57,9 @@ import { WebpayReturnComponent } from './components/reserva/return.component';
 import { RegistroClienteComponent } from './components/registro-clientes/registro-clientes.component';
 import { ClienteService } from './services/cliente.service';
 import { LoginClienteComponent } from './components/login-cliente/logincliente.component';
+import { CarroIndexComponent } from './components/carro/carro-index/carro-index.component';
+import { CarroCheckoutComponent } from './components/carro/carro-checkout/carro-checkout.component';
+import { CarroResponseComponent } from './components/carro/carro-response/carro-response.component';
 
 
 
@@ -88,7 +91,10 @@ import { LoginClienteComponent } from './components/login-cliente/logincliente.c
     Reporte1Component,
     Reporte2Component,
     Reporte3Component,
-    WebpayReturnComponent
+    WebpayReturnComponent,
+    CarroIndexComponent,
+    CarroCheckoutComponent,
+    CarroResponseComponent
   ],
   imports: [
     ReactiveFormsModule,

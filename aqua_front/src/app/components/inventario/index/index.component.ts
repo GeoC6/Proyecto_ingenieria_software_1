@@ -37,7 +37,7 @@ export class InventarioIndexModule { }
 export class InventarioIndexComponent implements OnInit {
 
   inventario: any[] = [];
-  displayedColumns: any[] = ['cod_producto', 'nombre_producto', 'precio_producto', 'cantidad_total', 'cantidad_disponible', 'imagen','acciones usuario'];
+  displayedColumns: any[] = ['cod_producto', 'nombre_producto', 'precio_producto', 'cantidad_total', 'cantidad_disponible','acciones usuario'];
 
   constructor(private inventarioService: InventarioService, private router: Router) {}
 
