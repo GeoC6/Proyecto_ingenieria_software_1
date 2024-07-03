@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
-import { RouterLink } from '@angular/router'
+import { Router } from '@angular/router'
 import { CarroService } from 'src/app/services/carro.service'
 
 @Component({
@@ -9,7 +9,7 @@ import { CarroService } from 'src/app/services/carro.service'
   styleUrls: ['./carro-index.component.css'],
 })
 export class CarroIndexComponent implements OnInit {
-  constructor(private carroService: CarroService) {}
+  constructor(private carroService: CarroService, private router: Router) {}
 
   data: any = []
   carro: any = []
@@ -27,6 +27,14 @@ export class CarroIndexComponent implements OnInit {
     )
     this.getCarro()
   }
+  irAPerfil() {
+    this.router.navigate(['/loginCliente2']);
+  }
+  logOut() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/inicio'])
+}
+
 
   addCarro(id: number) {
     const index = this.data.find(

@@ -99,9 +99,36 @@ export const loginCliente = async (req: Request, res: Response) => {
     }
 };
 
+export const getPerfil = async (req: Request, res: Response) => {
+    const cod_cliente = req.body.cod_cliente;
+    if (!cod_cliente){
+        return res.status(400).json({
+            msg: 'Error al cargar informacion del Perfil',
+        });
+    }
+    try {
+        const infoPerfil = await Cliente.findOne({
+            attributes: [
+                'COD_CLIENTE',
+                'CORREO_CLIENTE',
+                'CELULAR_CLIENTE',
+                'NOMBRE_CLIENTE',
+                'APELLIDO_CLIENTE',
+                'DIRECCION_CLIENTE',
+            ]
+        });
+        console.log(infoPerfil)
+        res.json({infoPerfil})
+    }catch (error) {
+        res.status(404).json({
+            msg: 'Perfil no valido',
+            error
+        });
+    }
+};
+
 export const getCliente = async (req: Request, res: Response) => {
     const { cod_cliente } = req.params;
-
     try {
         const idCliente = await Cliente.findOne({
             attributes: [
@@ -115,13 +142,11 @@ export const getCliente = async (req: Request, res: Response) => {
             ],
             where: { COD_CLIENTE: cod_cliente }
         });
-
         if (!idCliente) {
             return res.status(404).json({
                 msg: "El código de cliente indicado no existe"
             });
         }
-
         return res.json(idCliente);
     } catch (error) {
         return res.status(400).json({

@@ -6,10 +6,10 @@ import { Credentials } from 'src/app/interfaces/cliente';
 
 @Component({
   selector: 'app-login-cliente',
-  templateUrl: './logincliente.component.html',
-  styleUrls: ['./logincliente.component.css']
+  templateUrl: './logincliente2.component.html',
+  styleUrls: ['./logincliente2.component.css']
 })
-export class LoginClienteComponent {
+export class LoginClienteComponent2 {
   correo: string = '';
   contrasena: string = '';
   loading: boolean = false;
@@ -28,7 +28,6 @@ export class LoginClienteComponent {
   irAInicio() {
     this.router.navigate(['/inicio']);
   }
-
   login() {
     if (!this.correo || !this.contrasena) {
       this.toastr.error('Correo y contraseña son obligatorios', 'Error');
@@ -48,7 +47,7 @@ export class LoginClienteComponent {
         this.loading = false;
         if (response && response.token) {
           this.toastr.success('Login exitoso', 'Bienvenido');
-          this.router.navigate(['/web']);
+          this.router.navigate(['/perfil']);
         } else {
           this.toastr.error('Correo o contraseña incorrectos', 'Error');
         }

@@ -46,10 +46,10 @@ import { ReservaModule } from './components/reserva/reserva.module';
 import { ReservaComponent } from './components/reserva/reserva.component';
 import { InventarioCreateComponent } from './components/inventario/create/create.component';
 import { InventarioEditComponent } from './components/inventario/edit/edit.component';
-import { HistorialComponent } from './components/historial/historial.component';
-import { Reporte1Component } from './components/historial/reporte1/reporte1.component';
-import { Reporte2Component } from './components/historial/reporte2/reporte2.component';
-import { Reporte3Component } from './components/historial/reporte3/reporte3.component';
+// import { HistorialComponent } from './components/historial/transaction.component';
+// import { Reporte1Component } from './components/historial/reporte1/reporte1.component';
+// import { Reporte2Component } from './components/historial/reporte2/reporte2.component';
+// import { Reporte3Component } from './components/historial/reporte3/reporte3.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -60,11 +60,15 @@ import { LoginClienteComponent } from './components/login-cliente/logincliente.c
 import { CarroIndexComponent } from './components/carro/carro-index/carro-index.component';
 import { CarroCheckoutComponent } from './components/carro/carro-checkout/carro-checkout.component';
 import { CarroResponseComponent } from './components/carro/carro-response/carro-response.component';
+import { TransactionComponent } from './components/transaction/transaction.component';
+import { LoginClienteComponent2 } from './components/login-cliente2/logincliente2.component';
 
 
 
 @NgModule({
   declarations: [
+    LoginClienteComponent2,
+    TransactionComponent,
     RegistroClienteComponent,
     LoginClienteComponent,
     AppComponent,
@@ -87,14 +91,14 @@ import { CarroResponseComponent } from './components/carro/carro-response/carro-
     VempleadosComponent,
     InventarioCreateComponent,
     InventarioEditComponent,
-    HistorialComponent,
-    Reporte1Component,
-    Reporte2Component,
-    Reporte3Component,
+    // HistorialComponent,
+    // Reporte1Component,
+    // Reporte2Component,
+    // Reporte3Component,
     WebpayReturnComponent,
     CarroIndexComponent,
     CarroCheckoutComponent,
-    CarroResponseComponent
+    CarroResponseComponent,
   ],
   imports: [
     ReactiveFormsModule,

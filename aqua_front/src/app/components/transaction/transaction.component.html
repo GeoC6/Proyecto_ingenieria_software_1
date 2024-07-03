@@ -1,0 +1,38 @@
+<div class="container">
+  <mat-toolbar>
+    <span>Lista de empleados</span>
+    <span class="filler"></span>
+  </mat-toolbar>
+
+  <table mat-table [dataSource]="transactionsDataSource" class="mat-elevation-z8">
+    <!-- Columnas de la tabla -->
+    <ng-container matColumnDef="COD_CLIENTE">
+      <th mat-header-cell *matHeaderCellDef>Código de Cliente</th>
+      <td mat-cell *matCellDef="let transaction">{{ transaction.COD_CLIENTE }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="TRANSACTION_DATE">
+      <th mat-header-cell *matHeaderCellDef>Fecha de Transacción</th>
+      <td mat-cell *matCellDef="let transaction">{{ transaction.TRANSACTION_DATE }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="AMOUNT">
+      <th mat-header-cell *matHeaderCellDef>Monto</th>
+      <td mat-cell *matCellDef="let transaction">{{ transaction.AMOUNT }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="STATUS">
+      <th mat-header-cell *matHeaderCellDef>Estado</th>
+      <td mat-cell *matCellDef="let transaction">{{ transaction.STATUS }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="CODE">
+      <th mat-header-cell *matHeaderCellDef>Código</th>
+      <td mat-cell *matCellDef="let transaction">{{ transaction.CODE }}</td>
+    </ng-container>
+
+    <!-- Definición de las filas -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let transaction; columns: displayedColumns"></tr>
+  </table>
+</div>

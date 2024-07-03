@@ -1,23 +1,30 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <div class="d-flex align-items-center">
-      <a class="navbar-brand" href="#">
+
         <img
           src="../../../assets/img/logoAqua.png"
           alt="Aqua Logo"
           width="70"
           class="mr-2"
         />
-      </a>
+
       <h2
         style="font-size: 30px; margin: 0; padding: 15px 0"
         class="text-white mx-auto text-center"
       >
-        Productos
+      <div class="contenedor12">
+        <button class="btn btn-perfil" (click)="irAPerfil()">Perfil</button>
+      </div>
       </h2>
+      
+    </div>
+    <div class="contenedor12">
+      <button class="btn btn-danger" (click)="logOut()">Cerrar Sesión</button>
     </div>
     <!-- Dropdown de Carrito -->
     <div class="dropdown">
+
       <button
         class="btn btn-secondary dropdown-toggle"
         type="button"
@@ -95,3 +102,4 @@
   </div>
 </div>
 </div>
+<button class="btn btn-perfil mt-3" (click)="irAPerfil()">Perfil</button>

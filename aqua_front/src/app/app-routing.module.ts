@@ -19,10 +19,10 @@ import { UempleadosComponent } from './components/uempleados/usuarios.component'
 import { VempleadosComponent } from './components/vempleados/vehiculo.component'
 import { InventarioCreateComponent } from './components/inventario/create/create.component'
 import { InventarioEditComponent } from './components/inventario/edit/edit.component'
-import { HistorialComponent } from './components/historial/historial.component'
-import { Reporte1Component } from './components/historial/reporte1/reporte1.component'
-import { Reporte2Component } from './components/historial/reporte2/reporte2.component'
-import { Reporte3Component } from './components/historial/reporte3/reporte3.component'
+// import { HistorialComponent } from './components/historial/transaction.component'
+// import { Reporte1Component } from './components/historial/reporte1/reporte1.component'
+// import { Reporte2Component } from './components/historial/reporte2/reporte2.component'
+// import { Reporte3Component } from './components/historial/reporte3/reporte3.component'
 
 //Guard
 import { AuthGuard } from './utils/auth.guard'
@@ -32,12 +32,15 @@ import { PerfilComponent } from './components/perfil/perfil.component'
 import { CarroIndexComponent } from './components/carro/carro-index/carro-index.component'
 import { CarroCheckoutComponent } from './components/carro/carro-checkout/carro-checkout.component'
 import { CarroResponseComponent } from './components/carro/carro-response/carro-response.component'
+import { TransactionComponent} from './components/transaction/transaction.component'
+import { LoginClienteComponent2 } from './components/login-cliente2/logincliente2.component'
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'perfil', component: PerfilComponent },
   { path: 'registro', component: RegistroClienteComponent },
   { path: 'loginCliente', component: LoginClienteComponent },
+  { path: 'loginCliente2', component: LoginClienteComponent2},
   { path: 'reserva', component: ReservaComponent },
   {
     path: 'reserva',
@@ -93,14 +96,15 @@ const routes: Routes = [
     component: InventarioEditComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'historial',
-    component: HistorialComponent,
-    canActivate: [AuthGuard],
-  },
-  { path: 'reporte1', component: Reporte1Component, canActivate: [AuthGuard] },
-  { path: 'reporte2', component: Reporte2Component, canActivate: [AuthGuard] },
-  { path: 'reporte3', component: Reporte3Component, canActivate: [AuthGuard] },
+  // {
+  //   path: 'historial',
+  //   component: HistorialComponent,
+  //   canActivate: [AuthGuard],
+  // },
+  { path: 'historial', component: TransactionComponent},
+  // { path: 'reporte1', component: Reporte1Component, canActivate: [AuthGuard] },
+  // { path: 'reporte2', component: Reporte2Component, canActivate: [AuthGuard] },
+  // { path: 'reporte3', component: Reporte3Component, canActivate: [AuthGuard] },
 
   /* CARRO */
   { path: 'web', component: CarroIndexComponent },

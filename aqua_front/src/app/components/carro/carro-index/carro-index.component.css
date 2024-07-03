@@ -6,3 +6,15 @@
     font-size: 1rem;
     margin-bottom: 1rem;
   }
+
+.btn-perfil {
+  color: black;
+  background-color: aliceblue;
+  display: flex;
+  font-size: 1.5rem;
+
+}
+.contenedor12 {
+  display: flex;
+  justify-content: center;
+}
